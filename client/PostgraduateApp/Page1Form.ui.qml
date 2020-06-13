@@ -2,8 +2,9 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 
 Page {
-    width: 320
-    height: 480
+    width: 480
+    height: 720
+    property alias column: column
     title: "我的"
 
 

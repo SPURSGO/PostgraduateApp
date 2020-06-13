@@ -4,8 +4,8 @@ import QtQuick.Controls 2.5
 ApplicationWindow {
     id: window
     visible: true
-    width: 320
-    height: 480
+    width: 480
+    height: 720
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
@@ -71,10 +71,20 @@ ApplicationWindow {
             }
         }
     }
+    More{
+        id:mymore
+        text:mytest.gettext(mytest.modelindex)
+    }
+
+    Home{
+        id:mytest
+        onMysignal:stackView.push(mymore)
+    }
+
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
+        initialItem: mytest
         anchors.fill: parent
     }
 }
