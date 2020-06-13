@@ -2,13 +2,86 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 
 Page {
-    width: 600
-    height: 400
+    width: 480
+    height: 720
+    property alias column: column
+    title: "我的"
 
-    title: qsTr("Page 1")
 
-    Label {
-        text: qsTr("You are on Page 1.")
-        anchors.centerIn: parent
+    Column {
+        id: column
+        x:3
+        y: 11
+        width: parent.width
+        height: 164
+        spacing: 2
+        Repeater {
+            model: 1
+            Rectangle {
+                width: parent.width
+                height: parent.height
+
+                radius: 4
+
+                color: "lightblue"
+            }
+        }
+
+
+
+        Row {
+        id: row
+        width: parent.width
+        height: 80
+
+        Button {
+            id: button
+            width: parent.width/2
+            height:parent.height
+            text: qsTr("Button")
+        }
+        Button {
+            id: button1
+            width: parent.width/2
+            height:parent.height
+            text: qsTr("Button")
+        }
     }
+        Row {
+        id: row1
+        width: parent.width
+        height: 80
+
+        Button {
+            id: button2
+            width: parent.width/2
+            height:parent.height
+            text: qsTr("Button")
+        }
+        Button {
+            id: button3
+            width: parent.width/2
+            height:parent.height
+            text: qsTr("Button")
+        }
+    }
+        Row {
+        id: row2
+        width: parent.width
+        height: 80
+
+        Button {
+            id: button4
+            width: parent.width/2
+            height:parent.height
+            text: qsTr("Button")
+        }
+        Button {
+            id: button5
+            width: parent.width/2
+            height:parent.height
+            text: qsTr("Button")
+        }
+    }
+   }
 }

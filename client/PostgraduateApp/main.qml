@@ -4,9 +4,8 @@ import QtQuick.Controls 2.5
 ApplicationWindow {
     id: window
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Stack")
+    width: 480
+    height: 720
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
@@ -32,14 +31,14 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: window.width * 0.66
+        width: window.width * 0.3
         height: window.height
 
         Column {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Page 1")
+                text: qsTr("我的")
                 width: parent.width
                 onClicked: {
                     stackView.push("Page1Form.ui.qml")
@@ -47,7 +46,23 @@ ApplicationWindow {
                 }
             }
             ItemDelegate {
-                text: qsTr("Page 2")
+                text: qsTr("社区")
+                width: parent.width
+                onClicked: {
+                    stackView.push("Page2Form.ui.qml")
+                    drawer.close()
+                }
+            }
+            ItemDelegate {
+                text: qsTr("日历")
+                width: parent.width
+                onClicked: {
+                    stackView.push("Page2Form.ui.qml")
+                    drawer.close()
+                }
+            }
+            ItemDelegate {
+                text: qsTr("院校")
                 width: parent.width
                 onClicked: {
                     stackView.push("Page2Form.ui.qml")
@@ -56,10 +71,20 @@ ApplicationWindow {
             }
         }
     }
+    More{
+        id:mymore
+        text:mytest.gettext(mytest.modelindex)
+    }
+
+    Home{
+        id:mytest
+        onMysignal:stackView.push(mymore)
+    }
+
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
+        initialItem: mytest
         anchors.fill: parent
     }
 }
