@@ -7,9 +7,11 @@
         <file>Home.qml</file>
         <file>More.qml</file>
         <file>LoginPage.qml</file>
+        <file>RegisterPage.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/profilePic.png</file>
+        <file>images/register.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/roboto-light.ttf</file>

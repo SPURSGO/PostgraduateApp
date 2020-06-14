@@ -11,7 +11,7 @@ Page {
     property color popupBackGroundColor: "#b44"
     property color popupTextCOlor: "#ffffff"
 
-//    signal registerClicked()
+    //    signal registerClicked()
 
     background: Rectangle {
         color: backGroundColor
@@ -24,7 +24,7 @@ Page {
         height: parent.height / 2.6
         color: backGroundColor
 
-        Text {
+        Text {       //uniqCase
             id: title
             text: qsTr("<b>uniq</b>") + qsTr("Cast")
             font.family: "robotLight"
@@ -35,7 +35,7 @@ Page {
             font.pixelSize: Math.round(profilePic.height/3)
         }
 
-        Image {
+        Image {     //头像
             id: profilePic
             source: "qrc:/images/images/profilePic.png"
             sourceSize.width: loginPage.width / 5.5
@@ -45,7 +45,7 @@ Page {
         }
     }
 
-    // UserName, PIN and Login btn
+    // UserName, PIN and Login btn   // 用户名 密码 登陆按钮
     ColumnLayout {
         width: parent.width
         anchors.horizontalCenter: parent.horizontalCenter
@@ -64,18 +64,18 @@ Page {
             font.family: "robotLight"
             leftPadding: 30
             background: Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
+                width: parent.width - 10
+                height: 1
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                color: mainAppColor
             }
 
             onAccepted:
             {
-//                var message = "Wrong username or password"
-//                popup.popMessage = message
-//                popup.open()
+                //                var message = "Wrong username or password"
+                //                popup.popMessage = message
+                //                popup.open()
             }
         }
 
@@ -90,22 +90,20 @@ Page {
             leftPadding: 30
             echoMode: TextField.Password
             background: Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
+                width: parent.width - 10
+                height: 1
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                color: mainAppColor
             }
 
             onAccepted:    //槽  接受回车键的信号
             {
-//                var message = "Wrong username or password"
-//                popup.popMessage = message
-//                popup.open()
+
             }
         }
 
-        Button{
+        Button{     //登陆按钮
             id: loginBtn
             Layout.preferredWidth: title.width * 3
             Layout.preferredHeight: profilePic.height
@@ -139,17 +137,16 @@ Page {
 
 
 
-
-        RowLayout {
+        RowLayout {     //注册 和 忘记密码
             id: row1
             width: parent.width
             height: 30
             spacing:parent.width/3*2
 
-            Button {
+            Button {      //注册按钮   可以进行页面切换
                 id: register
-                width: 63
-                height: 12
+                width: 100
+                height: 30
 
                 Layout.leftMargin: parent.width/7
                 background: Rectangle {
@@ -158,15 +155,20 @@ Page {
                     Text {
                         id: text1
                         anchors.centerIn: parent
-                        text: qsTr("Sign in>>")
+                        text: qsTr("Sign up>>")
                         color: "#ffffff"
+                        font.underline: true
                         font.family: "微软雅黑 Light"
                         font.pointSize:11
                     }
                 }
+                onClicked: {
+                    showRegister()   //切换注册界面
+                }
+
             }
 
-            Button {
+            Button {    //忘记密码  没有实现
                 id: forgetPsd
                 width: 63
                 height: 12

@@ -83,6 +83,14 @@ ApplicationWindow {
                     drawer.close()
                 }
             }
+            ItemDelegate{
+                text: qsTr("注册")
+                width:parent.width
+                onClicked: {
+                    stackView.push("RegisterPage.qml")
+                    drawer.close()
+                }
+            }
         }
     }
     More{
@@ -100,5 +108,15 @@ ApplicationWindow {
         id: stackView
         initialItem: mytest
         anchors.fill: parent
+    }
+
+    function showRegister()   //切换注册见面
+    {
+        stackView.replace("qrc:/RegisterPage.qml")
+    }
+
+    function showLogin()    //从 注册界面 切换登陆 界面
+    {
+        stackView.replace("qrc:/LoginPage.qml")
     }
 }
