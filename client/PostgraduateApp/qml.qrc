@@ -6,5 +6,12 @@
         <file>qtquickcontrols2.conf</file>
         <file>Home.qml</file>
         <file>More.qml</file>
+        <file>LoginPage.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/profilePic.png</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/roboto-light.ttf</file>
     </qresource>
 </RCC>

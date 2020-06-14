@@ -7,6 +7,12 @@ ApplicationWindow {
     width: 480
     height: 720
 
+    FontLoader {          //加载字体
+        id: robotoLight
+        name: "robotoLight"
+        source: "qrc:/fonts/fonts/roboto-light.ttf"
+    }
+
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
 
@@ -66,6 +72,14 @@ ApplicationWindow {
                 width: parent.width
                 onClicked: {
                     stackView.push("Page2Form.ui.qml")
+                    drawer.close()
+                }
+            }
+            ItemDelegate{
+                text: qsTr("登陆")
+                width:parent.width
+                onClicked: {
+                    stackView.push("LoginPage.qml")
                     drawer.close()
                 }
             }
