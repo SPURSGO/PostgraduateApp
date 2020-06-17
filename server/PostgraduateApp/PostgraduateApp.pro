@@ -5,3 +5,9 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp
+
+HEADERS += \
+    network_IO.h
+
+LIBS += \
+    -lpthread
