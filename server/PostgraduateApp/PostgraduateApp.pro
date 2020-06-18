@@ -5,11 +5,13 @@ CONFIG -= qt
 
 SOURCES += \
         article.cpp \
-        main.cpp
+        main.cpp \
+        redis_storage.cpp
 
 HEADERS += \
     article.h \
-    network_IO.h
+    network_IO.h \
+    redis_storage.h
 
 LIBS += \
     -lpthread
