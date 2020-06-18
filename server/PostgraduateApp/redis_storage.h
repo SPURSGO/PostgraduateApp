@@ -1,0 +1,4 @@
+#ifndef REDIS_STORAGE_H
+#define REDIS_STORAGE_H
+
+#endif // REDIS_STORAGE_H

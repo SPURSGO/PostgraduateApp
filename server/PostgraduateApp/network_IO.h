@@ -12,6 +12,9 @@
 #include <list>
 #include <semaphore.h>
 #include <cstring>
+#include <sstream>
+#include <vector>
+#include <iostream>
 
 /* 请求队列，线程共享 */
 static std::list<int> request_queue;
@@ -66,6 +69,19 @@ void addfd(int epollfd, int fd)
     setnonblock(fd);
 }
 
+/* 将协议中的每个单词提取出来 */
+void requestAnalyze(const char *read_buf, std::vector<std::string> &items)
+{
+    std::string request(read_buf);
+    std::istringstream requestItem(request);
+    std::string temp;
+    while (requestItem >> temp)
+    {
+        items.push_back(temp);
+    }
+}
+
+
 /*  在设计线程函数时，一旦涉及到互斥锁的应用时，一定要明确锁的状态,
  *  一定要如下一样，写明注释，在何处加锁，在何处解锁.
  *
@@ -95,6 +111,30 @@ void* worker(void *)
         auto readbytes = recv(connfd, read_buf, 1024, 0);
         if( readbytes == 0 ) /* recv返回0则说明连接的对方已经关闭连接了 */
             continue;
+
+        std::vector<std::string> items;
+        requestAnalyze(read_buf, items);// 将客户请求分解成每个单词
+
+        /*  客户请求格式：
+         *  register username pwssword
+         *  login username password
+         *  article
+         */
+        if(items[0] == "register")
+        {
+            // 向redis中存储 用户名-密码 键值对
+            std::cout << "client request: register!\n";
+        }
+        else if(items[0] == "login")
+        {
+            // 向redis中验证 用户名的密码是否正确
+            std::cout << "client request: login!\n";
+        }
+        else if(items[0] == "article")
+        {
+            // 响应文章内容
+            std::cout << "client request: article!\n";
+        }
 
         printf("get %ld bytes from client!\n", readbytes);
         printf("thread %lu get data from client: %s\n", pthread_self(), read_buf);
