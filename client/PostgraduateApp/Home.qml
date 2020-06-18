@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
+import ReadFileQML 1.0
 
 Page{
     id:root
@@ -8,35 +9,41 @@ Page{
     title:("Home")
 
     Rectangle {
-        width: 480
-        height:720
+        width: parent.width
+        height: parent.height
         color: "white"
 
         ListModel{
             id:id_model
 
             ListElement{
-                modeltext:"lzdsdasd"
+                modeltext:""
+                imagesource: ""
                 index:0
             }
             ListElement{
-                modeltext:"1李冯你好呀 "
+                modeltext:""
+                imagesource: ""
                 index:1
             }
             ListElement{
-                modeltext:"2李冯你好呀 "
+                modeltext:""
+                imagesource: ""
                 index:2
             }
             ListElement{
-                modeltext:"3李冯你好呀 "
+                modeltext:""
+                imagesource: ""
                 index:3
             }
             ListElement{
-                modeltext:"4李冯你好呀 "
+                modeltext:""
+                imagesource: ""
                 index:4
             }
             ListElement{
-                modeltext:"5李冯你好呀 "
+                modeltext:""
+                imagesource: ""
                 index:5
             }
         }
@@ -53,20 +60,33 @@ Page{
                 Rectangle {
                     id:rectangle
                     width: ListView.view.width
-                    height: 80
-
+                    height: 180
+                    radius: 10
                     color: ListView.isCurrentItem ? "lightGray" : "gray"
 
                     Text {
                         id:text1
-                        anchors.centerIn: parent
-                        font.pixelSize: 10
+                        width:parent.width-120
+                        height: parent.height
+                        wrapMode: Text.WordWrap     //文本自动换行
                         text: modeltext
+                        font.pixelSize: 20
+                        elide:Text.ElideRight
+                    }
+                    Image {
+                        height: 100
+                        width: 120
+                        anchors.right: parent.right
+                        id: rectangle_image
+                        source: imagesource
                     }
                     MouseArea {
                         hoverEnabled: true
                         anchors.fill: parent
-                        onEntered: listView.currentIndex = index //实现item切
+                        onEntered:
+                        {
+                            listView.currentIndex = index //实现item切
+                        }
                         onClicked: root.mysignal()
                     }
                 }
@@ -75,7 +95,7 @@ Page{
             focus: true
 
             Timer{
-                interval: 1000;running:true;repeat: false
+                interval: 100;running:true;repeat: false
                 onTriggered:{
                     for(var i=0;i<6;i++){
                         change_id_model_modeltext(i)
@@ -84,7 +104,11 @@ Page{
           }
         }
     }
-
+    FileIo{
+           id:myFile
+           source:"good.txt"
+           onError: console.log(msg)
+       }
 
     function gettext(n){
         var item = id_model.get(n)
@@ -92,7 +116,27 @@ Page{
         return mystring
     }
 
-   function change_id_model_modeltext(n){
-        id_model.get(n).modeltext="dasdsadsadasd"
+    function change_id_model_modeltext(n){
+        console.log("WRITE:" + myFile.write("this is really coolFileContent needs to inherit the QObject class and use a series of Qt macros within the class.
+The Q_PROPERTY macro is used here to declare a property of this class and give the method names corresponding to set and get. There is also the Q_INVOKABLE macro so that the methods of the FileContent class can be called in QML.
+
+The FileContent class here has two properties, one is the file name filename and the other is the content of the file. These two properties can be directly assigned as properties of Item in QML.
+
+We call FileContent in QML as FileContentItem, but now we can't diris is really coolFileContent needs to inherit the QObject class and use a series of Qt macros within the class.
+The Q_PROPERTY macro is used here to declare a property of this class and give the method names corresponding to set and get. There is also the Q_INVOKABLE macro so that the methods of the FileContent class can be called in QML.
+
+The FileContent class here has two properties, one is the file name filename and the other is the content of the file. These two properties can be directly assigned as properties of Item in QML.
+
+We call FileContent in QML as FileContentItem, but now we can't diris is really coolFileContent needs to inherit the QObject class and use a series of Qt macros within the class.
+The Q_PROPERTY macro is used here to declare a property of this class and give the method names corresponding to set and get. There is also the Q_INVOKABLE macro so that the methods of the FileContent class can be called in QML.
+
+The FileContent class here has two properties, one is the file name filename and the other is the content of the file. These two properties can be directly assigned as properties of Item in QML.
+
+We call FileContent in QML as FileContentItem, but now we can't directly refer to FileContentItem in QML files. We also need to register the class we wrote to the Qml system through the qmlRegisterType method provided by QmlEngine.
+
+Add in the main function:!"));
+        console.log("source: "+myFile.source)
+        id_model.get(n).modeltext= myFile.read()
+        id_model.get(n).imagesource="/images/images/profilePic.png"
    }
 }

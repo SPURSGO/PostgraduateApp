@@ -4,4 +4,12 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        article.cpp \
         main.cpp
+
+HEADERS += \
+    article.h \
+    network_IO.h
+
+LIBS += \
+    -lpthread

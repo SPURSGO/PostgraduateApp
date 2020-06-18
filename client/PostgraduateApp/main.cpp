@@ -1,13 +1,18 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+<<<<<<< HEAD
 #include <QtQml>
 #include "userRegister.h"
+=======
+#include "fileio.h"
+>>>>>>> 676a50b97d37751837988e4cd5de240569bb22a9
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+    qmlRegisterType<FileIO>("ReadFileQML",1,0,"FileIo");
 
     QQmlApplicationEngine engine;
     qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
