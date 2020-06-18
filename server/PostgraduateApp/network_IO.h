@@ -70,6 +70,7 @@ void addfd(int epollfd, int fd)
 }
 
 /* 将协议中的每个单词提取出来 */
+/* 注意，C++容器是非线程安全的 */
 void requestAnalyze(const char *read_buf, std::vector<std::string> &items)
 {
     std::string request(read_buf);
@@ -112,32 +113,33 @@ void* worker(void *)
         if( readbytes == 0 ) /* recv返回0则说明连接的对方已经关闭连接了 */
             continue;
 
-        std::vector<std::string> items;
-        requestAnalyze(read_buf, items);// 将客户请求分解成每个单词
-
         /*  客户请求格式：
          *  register username pwssword
          *  login username password
-         *  article
          */
-        if(items[0] == "register")
+        std::string request(read_buf);
+        std::string requestType(request.substr(0, request.find(" ")));
+        std::string requestContent(request.substr(request.find(" ")+1));
+
+        if(requestType == "register")
         {
             // 向redis中存储 用户名-密码 键值对
             std::cout << "client request: register!\n";
+            std::cout << "Content: " << requestContent << std::endl;
         }
-        else if(items[0] == "login")
+        else if(requestType == "login")
         {
             // 向redis中验证 用户名的密码是否正确
             std::cout << "client request: login!\n";
         }
-        else if(items[0] == "article")
+        else if(requestType == "article")
         {
             // 响应文章内容
             std::cout << "client request: article!\n";
         }
 
-        printf("get %ld bytes from client!\n", readbytes);
-        printf("thread %lu get data from client: %s\n", pthread_self(), read_buf);
+//        printf("get %ld bytes from client!\n", readbytes);
+//        printf("thread %lu get data from client: %s\n", pthread_self(), read_buf);
 
         unsigned long tid = pthread_self();
         char tid_to_char[40];

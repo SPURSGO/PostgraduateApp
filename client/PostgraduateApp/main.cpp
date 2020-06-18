@@ -13,9 +13,8 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     qmlRegisterType<FileIO>("ReadFileQML",1,0,"FileIo");
-
-    QQmlApplicationEngine engine;
     qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
+    QQmlApplicationEngine engine;
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

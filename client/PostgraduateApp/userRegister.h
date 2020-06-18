@@ -33,37 +33,12 @@ public:
 
         std::string u = username.toLatin1().data();
         std::string p = pwd.toLatin1().data();
-        std::string userInfo = u + " " + p;
+        std::string userInfo = "register " + u + " " + p;  // username password
         send(sockfd, userInfo.c_str(), userInfo.size(), 0);
         char registerStatus[1024];
         memset(registerStatus, '\0', 1024);
     }
 
 };
-
-
-//void UserRegister::sendInfo(const QString &username, const QString &pwd)
-//{
-//    const char *ip = "127.0.0.1";
-//    unsigned short port = 12345;
-
-//    sockaddr_in serv;
-//    memset(&serv, '\0', sizeof (serv));
-//    serv.sin_family = AF_INET;
-//    inet_pton(AF_INET, ip, &serv.sin_addr);
-//    serv.sin_port = htons(port);
-
-//    int sockfd = socket(PF_INET, SOCK_STREAM, 0);
-//    assert( sockfd >= 0 );
-
-//    assert( App::getConnect(sockfd, serv, sizeof (serv)) != -1 );
-
-//    std::string u = username.toLatin1().data();
-//    std::string p = pwd.toLatin1().data();
-//    std::string userInfo = u + " " + p;
-//    send(sockfd, userInfo.c_str(), userInfo.size(), 0);
-//    char registerStatus[1024];
-//    memset(registerStatus, '\0', 1024);
-//}
 
 #endif // USERREGISTER_H
