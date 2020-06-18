@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
+import PGAPP.controls 1.0
 
 Page {
     id: registerPage
@@ -68,7 +69,6 @@ Page {
 
             onAccepted:
             {
-
             }
         }
 
@@ -128,6 +128,11 @@ Page {
             }
         }
 
+        UserRegister
+        {
+            id:ur
+        }
+
         Button{
             id: regsterBtn
             Layout.preferredWidth: register.sourceSize.width *4
@@ -159,18 +164,23 @@ Page {
                     var message_1 = "please enter user name"
                     popup.popMessage = message_1
                     popup.open()
-                }else if(registerPassword.text ==="" || registerPassword_copy.text==="")
+                }
+               else if(registerPassword.text ==="" || registerPassword_copy.text==="")
                 {
                     var message_2 = "Please enter the password"
                     popup.popMessage = message_2
                     popup.open()
-                }else if(registerPassword.text != registerPassword_copy.text)
+                }
+               else if(registerPassword.text != registerPassword_copy.text)
                 {
                    var message = "Please ensure that the password entered twice is the same"
                    popup.popMessage = message
                    popup.open()
                }
-
+               else
+               {
+                    ur.sendInfo(registerUsername.text, registerPassword.text) //
+               }
 
             }
         }
