@@ -1,11 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-<<<<<<< HEAD
+
 #include <QtQml>
 #include "userRegister.h"
-=======
+
 #include "fileio.h"
->>>>>>> 676a50b97d37751837988e4cd5de240569bb22a9
+
 
 int main(int argc, char *argv[])
 {
