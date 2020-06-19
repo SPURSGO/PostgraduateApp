@@ -141,17 +141,18 @@ Page {
             id: row1
             width: parent.width
             height: 30
-            spacing:parent.width/3*2
+            spacing:parent.width/4*2
 
             Button {      //注册按钮   可以进行页面切换
                 id: register
-                width: 100
-                height: 30
 
+                height: parent.height
+                Layout.preferredWidth: text1.width
                 Layout.leftMargin: parent.width/7
                 background: Rectangle {
                     anchors.fill: parent
                     color: "transparent"
+
                     Text {
                         id: text1
                         anchors.centerIn: parent

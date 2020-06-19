@@ -179,7 +179,9 @@ Page {
                }
                else
                {
-                    ur.sendInfo(registerUsername.text, registerPassword.text) //
+//                    ur.sendInfo(registerUsername.text, registerPassword.text) //
+
+                   networkmange.register_userinfo(registerUsername.text, registerPassword.text)
                }
 
             }
@@ -208,13 +210,15 @@ Page {
 
         Button {
             id: loginButton
-            width: 50
+            Layout.preferredWidth: text2.width
             height: 20
 
             background: Rectangle {
                 anchors.fill: parent
                 color: "transparent"
+
                 Text {
+                    id:text2
                     anchors.centerIn: parent
                     text: qsTr("Sign in")
                     color: "white"
