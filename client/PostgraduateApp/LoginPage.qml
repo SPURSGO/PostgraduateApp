@@ -129,9 +129,25 @@ Page {
 
             // Trigger loginUser with username and password
             onClicked: {  //点击登陆
-                var message = "Wrong username or password"
-                popup.popMessage = message
-                popup.open()
+
+
+                if(loginUsername.text=="" || loginPassword.text=="")
+                {
+                    var message_2 = "Please enter a username or password"
+                    popup.popMessage = message_2
+                    popup.open()
+                }else{
+                    if(networkmange.login(loginUsername.text,loginPassword.text)) //登陆成功
+                    {
+                        var message = "Landed successfully"
+                        popup.popMessage = message
+                        popup.open()
+                    }else{
+                        var message_1 = "Login failed"
+                        popup.popMessage = message_1
+                        popup.open()
+                    }
+                }
             }
         }
 

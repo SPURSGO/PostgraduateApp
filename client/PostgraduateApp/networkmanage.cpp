@@ -21,7 +21,7 @@ Q_INVOKABLE void Networkmanage::connect_server()  //进行网络连接
     serv.sin_family = AF_INET;   // Internet地址族
     inet_pton(AF_INET, ip, &serv.sin_addr);
     serv.sin_port = htons(port);
-    std::cout<<"error"<<std::endl;
+
 
     if(getConnect(socketfd, serv, sizeof (serv)) != -1)  //连接服务器
     {

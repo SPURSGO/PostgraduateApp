@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<FileIO>("ReadFileQML",1,0,"FileIo");
 
     Networkmanage networkmange;
+    networkmange.connect_server();
     QQmlApplicationEngine engine;
 
     qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
