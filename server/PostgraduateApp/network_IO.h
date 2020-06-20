@@ -15,6 +15,7 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include "redis_storage.h"
 
 /* 请求队列，线程共享 */
 static std::list<int> request_queue;
@@ -83,7 +84,8 @@ void requestAnalyze(const char *read_buf, std::vector<std::string> &items)
 }
 
 
-/*  在设计线程函数时，一旦涉及到互斥锁的应用时，一定要明确锁的状态,
+/*  工作线程逻辑：
+ *  在设计线程函数时，一旦涉及到互斥锁的应用时，一定要明确锁的状态,
  *  一定要如下一样，写明注释，在何处加锁，在何处解锁.
  *
  *  此外，在线程函数中，只能调用线程安全的函数.
@@ -120,26 +122,51 @@ void* worker(void *)
         std::string request(read_buf);
         std::string requestType(request.substr(0, request.find(" ")));
         std::string requestContent(request.substr(request.find(" ")+1));
+        std::string contentFirst(requestContent.substr(0, requestContent.find(" ")));
+        std::string contentSecond(requestContent.substr(requestContent.find(" ") + 1));
 
         if(requestType == "register")
         {
+            std::cout << "username:" << contentFirst << "  password:" << contentSecond << std::endl;
             // 向redis中存储 用户名-密码 键值对
-            std::cout << "client request: register!\n";
-            std::cout << "Content: " << requestContent << std::endl;
+            const char *redis_addr = "127.0.0.1:6379";
+            acl::redis_client conn(redis_addr);
+            if( register2Redis(conn, contentFirst.c_str(), contentSecond.c_str()) )
+            {
+                std::string result = "OK!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
+            else
+            {
+                std::string result = "ERROR!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
         }
         else if(requestType == "login")
         {
             // 向redis中验证 用户名的密码是否正确
-            std::cout << "client request: login!\n";
+            const char *redis_addr = "127.0.0.1:6379";
+            acl::redis_client conn(redis_addr);
+            if( loginCheck(conn, contentFirst.c_str(), contentSecond) )
+            {
+                std::string result = "OK!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
+            else
+            {
+                std::string result = "ERROR!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
         }
         else if(requestType == "article")
         {
             // 响应文章内容
             std::cout << "client request: article!\n";
         }
-
-//        printf("get %ld bytes from client!\n", readbytes);
-//        printf("thread %lu get data from client: %s\n", pthread_self(), read_buf);
 
         unsigned long tid = pthread_self();
         char tid_to_char[40];

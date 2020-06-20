@@ -14,4 +14,5 @@ HEADERS += \
     redis_storage.h
 
 LIBS += \
-    -lpthread
+    -lpthread \
+    -L/usr/local/lib/ -lacl_all
