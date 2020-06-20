@@ -179,7 +179,18 @@ Page {
                }
                else
                {
-                    ur.sendInfo(registerUsername.text, registerPassword.text) //
+//                    ur.sendInfo(registerUsername.text, registerPassword.text) //
+
+                   if(!networkmange.register_userinfo(registerUsername.text, registerPassword.text))  //注册失败
+                   {
+                       var message_3 = "The account already exists,registration failed"
+                       popup.popMessage = message_3
+                       popup.open()
+                   }else{                  //注册成功
+                       var message_4 = "registration success"
+                       popup.popMessage = message_4
+                       popup.open()
+                   }
                }
 
             }
@@ -208,13 +219,15 @@ Page {
 
         Button {
             id: loginButton
-            width: 50
+            Layout.preferredWidth: text2.width
             height: 20
 
             background: Rectangle {
                 anchors.fill: parent
                 color: "transparent"
+
                 Text {
+                    id:text2
                     anchors.centerIn: parent
                     text: qsTr("Sign in")
                     color: "white"

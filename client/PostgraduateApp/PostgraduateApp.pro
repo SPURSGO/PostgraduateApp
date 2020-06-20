@@ -16,7 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         network.cpp\
-        fileio.cpp
+        fileio.cpp \
+        networkmanage.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,7 +33,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    network.h \
+    network.h  \
+    networkmanage.h \
     userRegister.h\
     fileio.h
 #LIBS += -L/usr/lib/ -lpthread
