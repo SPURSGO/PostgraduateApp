@@ -179,8 +179,6 @@ Page {
                }
                else
                {
-//                    ur.sendInfo(registerUsername.text, registerPassword.text) //
-
                    if(!networkmange.register_userinfo(registerUsername.text, registerPassword.text))  //注册失败
                    {
                        var message_3 = "The account already exists,registration failed"
@@ -190,12 +188,11 @@ Page {
                        var message_4 = "registration success"
                        popup.popMessage = message_4
                        popup.open()
+                       showLogin()
                    }
                }
-
             }
         }
-
     }
 
     RowLayout {     //切换登陆 按钮
@@ -267,7 +264,7 @@ Page {
         onOpened: popupClose.start()
     }
 
-    // Popup will be closed automatically in 2 seconds after its opened
+    // Popup will be closed automatically in 3 seconds after its opened
     Timer {
         id: popupClose
         interval: 3000
