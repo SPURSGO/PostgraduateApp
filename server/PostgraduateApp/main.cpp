@@ -26,7 +26,7 @@ int main(int argc, char **argv )
 
     int epollfd = epoll_create(100);
     /* 初始化监听socket */
-    int listenfd = init_listenfd("127.0.0.1", 8080); /* argv[1], atoi( argv[2] ) */
+    int listenfd = init_listenfd("127.0.0.1", 9001); /* argv[1], atoi( argv[2] ) */
     if( listenfd < 0 )
     {
         printf("init_listenfd fail!\n");

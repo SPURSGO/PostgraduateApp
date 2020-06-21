@@ -168,20 +168,21 @@ void* worker(void *)
             std::cout << "client request: article!\n";
         }
 
-        unsigned long tid = pthread_self();
+     /* unsigned long tid = pthread_self();
         char tid_to_char[40];
         sprintf(tid_to_char, "%lu", tid);
 
         char send_buf[1024] = "data from server with thread. ";
         strcat(send_buf, tid_to_char);
 
-        /* 若往已经关闭的连接socket中写数据，则会造成线程函数的异常退出,从而使所有线程退出 */
+        // 若往已经关闭的连接socket中写数据，则会造成线程函数的异常退出,从而使所有线程退出
         auto sendbytes = send(connfd, send_buf, 1024, 0);
         if(sendbytes < 0)
         {
             printf("send data fail!\n");
             continue;
         }
+       */
     }
 }
 
