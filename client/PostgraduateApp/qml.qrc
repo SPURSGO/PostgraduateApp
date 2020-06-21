@@ -8,10 +8,15 @@
         <file>More.qml</file>
         <file>LoginPage.qml</file>
         <file>RegisterPage.qml</file>
+        <file>Day.qml</file>
+        <file>DayTemplet.qml</file>
+        <file>OneMonth.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/profilePic.png</file>
         <file>images/register.png</file>
+        <file>images/arrowleft.png</file>
+        <file>images/arrowright.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/roboto-light.ttf</file>

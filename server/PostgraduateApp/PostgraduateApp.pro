@@ -4,10 +4,15 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        article.cpp \
+        main.cpp \
+        redis_storage.cpp
 
 HEADERS += \
-    network_IO.h
+    article.h \
+    network_IO.h \
+    redis_storage.h
 
 LIBS += \
-    -lpthread
+    -lpthread \
+    -L/usr/local/lib/ -lacl_all

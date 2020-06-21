@@ -12,6 +12,10 @@
 #include <list>
 #include <semaphore.h>
 #include <cstring>
+#include <sstream>
+#include <vector>
+#include <iostream>
+#include "redis_storage.h"
 
 /* 请求队列，线程共享 */
 static std::list<int> request_queue;
@@ -66,7 +70,22 @@ void addfd(int epollfd, int fd)
     setnonblock(fd);
 }
 
-/*  在设计线程函数时，一旦涉及到互斥锁的应用时，一定要明确锁的状态,
+/* 将协议中的每个单词提取出来 */
+/* 注意，C++容器是非线程安全的 */
+void requestAnalyze(const char *read_buf, std::vector<std::string> &items)
+{
+    std::string request(read_buf);
+    std::istringstream requestItem(request);
+    std::string temp;
+    while (requestItem >> temp)
+    {
+        items.push_back(temp);
+    }
+}
+
+
+/*  工作线程逻辑：
+ *  在设计线程函数时，一旦涉及到互斥锁的应用时，一定要明确锁的状态,
  *  一定要如下一样，写明注释，在何处加锁，在何处解锁.
  *
  *  此外，在线程函数中，只能调用线程安全的函数.
@@ -96,23 +115,74 @@ void* worker(void *)
         if( readbytes == 0 ) /* recv返回0则说明连接的对方已经关闭连接了 */
             continue;
 
-        printf("get %ld bytes from client!\n", readbytes);
-        printf("thread %lu get data from client: %s\n", pthread_self(), read_buf);
+        /*  客户请求格式：
+         *  register username pwssword
+         *  login username password
+         */
+        std::string request(read_buf);
+        std::string requestType(request.substr(0, request.find(" ")));
+        std::string requestContent(request.substr(request.find(" ")+1));
+        std::string contentFirst(requestContent.substr(0, requestContent.find(" ")));
+        std::string contentSecond(requestContent.substr(requestContent.find(" ") + 1));
 
-        unsigned long tid = pthread_self();
+        if(requestType == "register")
+        {
+            std::cout << "username:" << contentFirst << "  password:" << contentSecond << std::endl;
+            // 向redis中存储 用户名-密码 键值对
+            const char *redis_addr = "127.0.0.1:6379";
+            acl::redis_client conn(redis_addr);
+            if( register2Redis(conn, contentFirst.c_str(), contentSecond.c_str()) )
+            {
+                std::string result = "OK!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
+            else
+            {
+                std::string result = "ERROR!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
+        }
+        else if(requestType == "login")
+        {
+            // 向redis中验证 用户名的密码是否正确
+            const char *redis_addr = "127.0.0.1:6379";
+            acl::redis_client conn(redis_addr);
+            if( loginCheck(conn, contentFirst.c_str(), contentSecond) )
+            {
+                std::string result = "OK!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
+            else
+            {
+                std::string result = "ERROR!";
+                std::cout << result << std::endl;
+                send(connfd, result.c_str(), result.size(), 0);
+            }
+        }
+        else if(requestType == "article")
+        {
+            // 响应文章内容
+            std::cout << "client request: article!\n";
+        }
+
+     /* unsigned long tid = pthread_self();
         char tid_to_char[40];
         sprintf(tid_to_char, "%lu", tid);
 
         char send_buf[1024] = "data from server with thread. ";
         strcat(send_buf, tid_to_char);
 
-        /* 若往已经关闭的连接socket中写数据，则会造成线程函数的异常退出,从而使所有线程退出 */
+        // 若往已经关闭的连接socket中写数据，则会造成线程函数的异常退出,从而使所有线程退出
         auto sendbytes = send(connfd, send_buf, 1024, 0);
         if(sendbytes < 0)
         {
             printf("send data fail!\n");
             continue;
         }
+       */
     }
 }
 

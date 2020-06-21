@@ -129,9 +129,25 @@ Page {
 
             // Trigger loginUser with username and password
             onClicked: {  //点击登陆
-                var message = "Wrong username or password"
-                popup.popMessage = message
-                popup.open()
+
+
+                if(loginUsername.text=="" || loginPassword.text=="")
+                {
+                    var message_2 = "Please enter a username or password"
+                    popup.popMessage = message_2
+                    popup.open()
+                }else{
+                    if(networkmange.login(loginUsername.text,loginPassword.text)) //登陆成功
+                    {
+                        var message = "Landed successfully"
+                        popup.popMessage = message
+                        popup.open()
+                    }else{
+                        var message_1 = "Login failed"
+                        popup.popMessage = message_1
+                        popup.open()
+                    }
+                }
             }
         }
 
@@ -141,17 +157,18 @@ Page {
             id: row1
             width: parent.width
             height: 30
-            spacing:parent.width/3*2
+            spacing:parent.width/4*2
 
             Button {      //注册按钮   可以进行页面切换
                 id: register
-                width: 100
-                height: 30
 
+                height: parent.height
+                Layout.preferredWidth: text1.width
                 Layout.leftMargin: parent.width/7
                 background: Rectangle {
                     anchors.fill: parent
                     color: "transparent"
+
                     Text {
                         id: text1
                         anchors.centerIn: parent

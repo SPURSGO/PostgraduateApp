@@ -1,6 +1,14 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "networkmanage.h"
+#include <QtQml>
+#include <QQmlContext>
+#include <QQuickView>
+
+#include "userRegister.h"
+
 #include "fileio.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -8,8 +16,18 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     qmlRegisterType<FileIO>("ReadFileQML",1,0,"FileIo");
-
+    qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
     QQmlApplicationEngine engine;
+
+    Networkmanage networkmange;
+    networkmange.connect_server();
+//    QQmlApplicationEngine engine;
+
+    qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
+    qmlRegisterType<Networkmanage>("NetWorkManage",1, 0,"NetWorkManage");
+
+    engine.rootContext()->setContextProperty("networkmange",&networkmange);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

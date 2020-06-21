@@ -17,16 +17,16 @@ using namespace std;
 
 int main(int argc, char **argv )
 {
-    if( argc < 3 )
-    {
-        printf("usage: %s <ip> <port>\n", argv[0]);
-        return 1;
-    }
+//    if( argc < 3 )
+//    {
+//        printf("usage: %s <ip> <port>\n", argv[0]);
+//        return 1;
+//    }
 
 
     int epollfd = epoll_create(100);
     /* 初始化监听socket */
-    int listenfd = init_listenfd(argv[1], atoi( argv[2] ));
+    int listenfd = init_listenfd("127.0.0.1", 9001); /* argv[1], atoi( argv[2] ) */
     if( listenfd < 0 )
     {
         printf("init_listenfd fail!\n");
