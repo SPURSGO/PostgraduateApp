@@ -119,4 +119,8 @@ ApplicationWindow {
     {
         stackView.replace("qrc:/LoginPage.qml")
     }
+    function loginSuccess()  //登陆成功切换到个人信息页面
+    {
+        stackView.replace("qrc:/Page1Form.ui.qml")
+    }
 }

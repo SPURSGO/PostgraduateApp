@@ -43,7 +43,7 @@ Q_INVOKABLE bool Networkmanage::register_userinfo(const QString& username, const
 
     std::string result(status);
 
-    return result=="ok!";
+    return result=="OK!";
 }
 
 Q_INVOKABLE bool Networkmanage::login(const QString &username, const QString &pwd)
@@ -59,7 +59,7 @@ Q_INVOKABLE bool Networkmanage::login(const QString &username, const QString &pw
 
     std::string result(status);
 
-    return result=="ok!";
+    return result=="OK!";
 }
 
 Q_INVOKABLE QString& Networkmanage::receive_article()
