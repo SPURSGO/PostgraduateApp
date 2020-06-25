@@ -117,7 +117,7 @@ Item {
             anchors.topMargin: 0
             anchors.left: parent.left
             anchors.leftMargin: 15
-            source: "/run/media/root/65C4DC795E153AD4/OpenSource/PostgraduateApp/client/PostgraduateApp/images/arrowleft.png"
+            source: "qrc:/images/images/arrowleft"
 
             anchors.fill: parent.Center
 
@@ -138,7 +138,7 @@ Item {
             anchors.topMargin: 0
             anchors.right: parent.right
             anchors.rightMargin: 15
-            source: "/run/media/root/65C4DC795E153AD4/OpenSource/PostgraduateApp/client/PostgraduateApp/images/arrowright.png"
+            source: "qrc:/images/images/arrowright"
             MouseArea{
                 anchors.fill: parent
                 onClicked: {
@@ -160,152 +160,122 @@ Item {
             anchors.top: rectangle1.bottom
             anchors.topMargin: 50
 
+            //显示星期几
             Rectangle {
-            id :row
-            height: 70
-            color: "#2c2f38"
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.top: parent.top
+                id :row
+                height: 70
+                color: "#2c2f38"
+                //            color: "white"
+                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.top: parent.top
 
                 Row {
                     id:dayname
+                    Repeater{
+                        model: ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五","星期六"]
+                        Rectangle{
+                            color: "#2c2f38"
+                            width: row.width/7
+                            height: 70
+                            Text {
+                                opacity: 0.5
+                                color: "#ffffff"
+                                anchors.centerIn: parent
+                                text: modelData
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            //日历的数字显示区
+            Rectangle {
+                id: rectangle3
+                color: "#2c2f38"
+                height: parent.height-row.height
+                width: parent.width
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.top: row.bottom
+                clip: true
+
+                PathView {
+                    id: pathView
                     anchors.fill: parent
-                    spacing: 1
+                    model: riliModel
+                    delegate: delegate
+                    currentIndex : 0
+                    clip:true
+                    path: Path {
 
-                    Text {
-                        id: day1
-                        width: 100
-                        color: "#ffffff"
-                        text: qsTr("周日")
-                        font.pixelSize: 10
+                        startX: - pathView.width/2
+                        startY: pathView.height/2
+
+                        PathLine {
+                            x: pathView.width*2.5
+                            y: pathView.height / 2
+                        }
+
+                    }
+
+                    //路径上可见的项目数。如果不设置则会全部显示出来
+                    pathItemCount:3
+                    //不让它有拖拉惯性，无论拖拉再远都只显示路径上紧邻的一个
+                    snapMode:PathView.SnapOneItem
+                }
+
+
+                //日历的数据，平常的日历只用传入年和月。
+                ListModel {
+                    id: riliModel
+
+                    //ListElement里面不允许写JS语法
+
+                    Component.onCompleted: {
+                        riliModel.append({"data_year": getYear(0,year,month),"data_month": getMonth(0,year,month)})
+                        riliModel.append({"data_year": getYear(1,year,month),"data_month": getMonth(1,year,month)})
+                        riliModel.append({"data_year": getYear(2,year,month),"data_month": getMonth(2,year,month)})
+                    }
+
+                    function getMonth(index,year,month){
+                        if(index === 1){
+                            return month
+                        }else if(index === 0){
+                            return month === 0 ? 11:month-1//如果是一月份，那么月份为11
+                        }else{
+                            return month === 11 ? 0:month+1
+                        }
+                    }
+
+                    function getYear(index,year,month){
+                        if(index === 1){
+                            return year
+                        }else if(index === 0){
+                            return month === 0 ? year -1:year //如果是一月份，那么年份减一
+                        }else{
+                            return month === 11 ?year +1:year
+                        }
+                    }
+                }
+
+                //代理，显示一个月的日历控件
+                Component {
+                    id:delegate
+                    OneMonth{
+                        height: rectangle3.height
+                        width: rectangle3.width
+                        year: data_year
+                        month: data_month
                     }
 
                 }
 
 
 
-
             }
-
-
-
-//                Text {
-//                    color: "#ffffff"
-//                    text: qsTr("周日")
-//                }
-//                        Text {
-//                            color: "#ffffff"
-//                            text: qsTr("周日")
-//                        }
-//                        Text {
-//                            color: "#ffffff"
-//                            text: qsTr("周日")
-//                        }
-//                        Text {
-//                            color: "#ffffff"
-//                            text: qsTr("周日")
-//                        }
-//                        Text {
-//                            color: "#ffffff"
-//                            text: qsTr("周日")
-//                        }
-//                        Text {
-//                            color: "#ffffff"
-//                            text: qsTr("周日")
-//                        }
-
-
-
-
-
-        //日历的数字显示区
-        Rectangle {
-            id: rectangle3
-//            color: "#2c2f38"
-            color: "white"
-            height: parent.height-row.height
-            width: parent.width
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.top: row.bottom
-            clip: true
-
-            PathView {
-                id: pathView
-                anchors.fill: parent
-                model: riliModel
-                delegate: delegate
-                currentIndex : 0
-                clip:true
-                path: Path {
-
-                    startX: - pathView.width/2
-                    startY: pathView.height/2
-
-                    PathLine {
-                        x: pathView.width*2.5
-                        y: pathView.height / 2
-                    }
-
-                }
-
-                //路径上可见的项目数。如果不设置则会全部显示出来
-                pathItemCount:3
-                //不让它有拖拉惯性，无论拖拉再远都只显示路径上紧邻的一个
-                snapMode:PathView.SnapOneItem
-            }
-
-
-            //日历的数据，平常的日历只用传入年和月。
-            ListModel {
-                id: riliModel
-
-                //ListElement里面不允许写JS语法
-
-                Component.onCompleted: {
-                    riliModel.append({"data_year": getYear(0,year,month),"data_month": getMonth(0,year,month)})
-                    riliModel.append({"data_year": getYear(1,year,month),"data_month": getMonth(1,year,month)})
-                    riliModel.append({"data_year": getYear(2,year,month),"data_month": getMonth(2,year,month)})
-                }
-
-                function getMonth(index,year,month){
-                    if(index === 1){
-                        return month
-                    }else if(index === 0){
-                        return month === 0 ? 11:month-1//如果是一月份，那么月份为11
-                    }else{
-                        return month === 11 ? 0:month+1
-                    }
-                }
-
-                function getYear(index,year,month){
-                    if(index === 1){
-                        return year
-                    }else if(index === 0){
-                        return month === 0 ? year -1:year //如果是一月份，那么年份减一
-                    }else{
-                        return month === 11 ?year +1:year
-                    }
-                }
-            }
-
-            //代理，显示一个月的日历控件
-            Component {
-                id:delegate
-                OneMonth{
-                    height: rectangle3.height
-                    width: rectangle3.width
-                    year: data_year
-                    month: data_month
-                }
-
-            }
-
-
-
         }
     }
-}
 }
