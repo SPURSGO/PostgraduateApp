@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
 import ReadFileQML 1.0
+import QtGraphicalEffects 1.0
 
 Page{
     id:root
@@ -18,32 +19,33 @@ Page{
 
             ListElement{
                 modeltext:""
-                imagesource: ""
+
+                imagesource: "qrc:/images/images/tx1.jpg"
                 index:0
             }
             ListElement{
                 modeltext:""
-                imagesource: ""
+                imagesource: "qrc:/images/images/tx2.jpg"
                 index:1
             }
             ListElement{
                 modeltext:""
-                imagesource: ""
+                imagesource: "qrc:/images/images/tx3.jpg"
                 index:2
             }
             ListElement{
                 modeltext:""
-                imagesource: ""
+                imagesource: "qrc:/images/images/tx4.jpg"
                 index:3
             }
             ListElement{
                 modeltext:""
-                imagesource: ""
+                imagesource: "qrc:/images/images/tx5.jpg"
                 index:4
             }
             ListElement{
                 modeltext:""
-                imagesource: ""
+                imagesource: "qrc:/images/images/tx6.jpg"
                 index:5
             }
         }
@@ -73,13 +75,37 @@ Page{
                         font.pixelSize: 20
                         elide:Text.ElideRight
                     }
-                    Image {
-                        height: 100
-                        width: 120
+
+                    //OpacityMask中的source表示你要显示的图片，maskSource表示将图片固定在此区域内显示。
+                    Item {
                         anchors.right: parent.right
-                        id: rectangle_image
-                        source: imagesource
+                        id:iconRct
+                        width: 100
+                        height: 100
+
+                        Rectangle{
+                            id:mask
+                            width: parent.width
+                            height: parent.height
+                            radius: width/2
+                            visible: false
+                        }
+
+                        Image {
+                            id: profilepic
+                            anchors.fill: parent
+                            smooth :true
+                            visible: false
+                            source: imagesource
+                        }
+
+                        OpacityMask{
+                            anchors.fill: parent
+                            source: profilepic
+                            maskSource: mask
+                        }
                     }
+
                     MouseArea {
                         hoverEnabled: true
                         anchors.fill: parent

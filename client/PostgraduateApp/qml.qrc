@@ -17,6 +17,12 @@
         <file>images/register.png</file>
         <file>images/arrowleft.png</file>
         <file>images/arrowright.png</file>
+        <file>images/tx1.jpg</file>
+        <file>images/tx2.jpg</file>
+        <file>images/tx3.jpg</file>
+        <file>images/tx4.jpg</file>
+        <file>images/tx5.jpg</file>
+        <file>images/tx6.jpg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/roboto-light.ttf</file>
