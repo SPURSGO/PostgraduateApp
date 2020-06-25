@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <error.h>
+#include <QString>
 
 
 Q_INVOKABLE void Networkmanage::connect_server()  //进行网络连接
@@ -60,12 +61,16 @@ Q_INVOKABLE bool Networkmanage::login(const QString &username, const QString &pw
 
     std::string result(status);
 
-    return result=="OK!";
+    return result == "OK!";
 }
 
-Q_INVOKABLE QString& Networkmanage::receive_article()
+Q_INVOKABLE QString Networkmanage::receive_article()
 {
-
+    size_t size = receive_size();
+    readn(size);
+    std::string s(essay);
+    QString article =QString::fromStdString(s);
+    return article;
 }
 
 Q_INVOKABLE bool Networkmanage::sendsingal()

@@ -28,11 +28,11 @@ Page{
                         font.pixelSize: 20
                    //     elide:Text.ElideRight
                     }
-                    Image{
+//                    Image{
 
-                        anchors.right: parent.right
-                        source: "/images/images/profilePic.png"
-                    }
+//                        anchors.right: parent.right
+//                        source: "/images/images/profilePic.png"
+//                    }
                 }
             Rectangle{
                     id:moreRectangle2

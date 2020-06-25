@@ -19,7 +19,7 @@ public:
 
     Q_INVOKABLE bool login(const QString& username, const QString& pwd);  //登陆
 
-    Q_INVOKABLE QString& receive_article();   //从服务器接收文章
+    Q_INVOKABLE QString receive_article();   //从服务器接收文章
 
     Q_INVOKABLE bool sendsingal(); // 请求服务器传送文章
 
