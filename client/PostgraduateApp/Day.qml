@@ -117,7 +117,7 @@ Item {
             anchors.topMargin: 0
             anchors.left: parent.left
             anchors.leftMargin: 15
-            source: "/run/media/root/65C4DC795E153AD4/OpenSource/PostgraduateApp/client/PostgraduateApp/images/arrowleft.png"
+            source: "qrc:/images/images/arrowleft"
 
             anchors.fill: parent.Center
 
@@ -138,7 +138,7 @@ Item {
             anchors.topMargin: 0
             anchors.right: parent.right
             anchors.rightMargin: 15
-            source: "/run/media/root/65C4DC795E153AD4/OpenSource/PostgraduateApp/client/PostgraduateApp/images/arrowright.png"
+            source: "qrc:/images/images/arrowright"
             MouseArea{
                 anchors.fill: parent
                 onClicked: {

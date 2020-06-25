@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
 
     Networkmanage networkmange;
     networkmange.connect_server();
-//    QQmlApplicationEngine engine;
 
     qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
     qmlRegisterType<Networkmanage>("NetWorkManage",1, 0,"NetWorkManage");
