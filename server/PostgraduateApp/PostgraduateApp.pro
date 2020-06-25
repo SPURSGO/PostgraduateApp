@@ -11,7 +11,8 @@ SOURCES += \
 HEADERS += \
     article.h \
     network_IO.h \
-    redis_storage.h
+    redis_storage.h \
+    video_translate.h
 
 LIBS += \
     -lpthread \
