@@ -114,9 +114,6 @@ Page{
 
     function change_id_model_modeltext(n){
         id_model.get(n).modeltext=networkmange.receive_article()
-        //        console.log("source: "+myFile.source)
-        //        id_model.get(n).modeltext= myFile.read()
-
-        id_model.get(n).imagesource="/images/images/profilePic.png"
+//        id_model.get(n).imagesource="/images/images/profilePic.png"
     }
 }

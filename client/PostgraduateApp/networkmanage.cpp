@@ -90,15 +90,18 @@ Q_INVOKABLE int Networkmanage::receive_size()
     }
 
     std::string S(essay);
-    std::string size(S.substr(S.find(":")));
+    std::cout << S << std::endl;
+    std::string size(S.substr(S.find(":")+1));
+    std::cout<<size<<std::endl;
     int num_size = atoi(size.c_str());
+    std::cout<<num_size<<std::endl;
     return num_size;
 }
 
 size_t Networkmanage::readn(size_t size)
 {
     int length = size;
-    memset(essay,0,MaxSize);
+    memset(essay,'\0', MaxPlus);
     char *buffer_pointer = essay;
 
     while (length > 0) {

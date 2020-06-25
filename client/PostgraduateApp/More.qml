@@ -22,17 +22,13 @@ Page{
                     height: myflickable.height/2
                     Text {
                         id:text1
-                        width:parent.width-120
+                        width:parent.width
                         height: parent.height
                         wrapMode: Text.WordWrap     //文本自动换行
                         font.pixelSize: 20
                    //     elide:Text.ElideRight
                     }
-//                    Image{
 
-//                        anchors.right: parent.right
-//                        source: "/images/images/profilePic.png"
-//                    }
                 }
             Rectangle{
                     id:moreRectangle2

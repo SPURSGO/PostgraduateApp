@@ -15,6 +15,8 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include <sys/stat.h>
+#include <sys/sendfile.h>
 #include "redis_storage.h"
 
 /* 请求队列，线程共享 */
@@ -164,8 +166,30 @@ void* worker(void *)
         }
         else if(requestType == "article")
         {
-            // 响应文章内容
             std::cout << "client request: article!\n";
+            // 响应文章内容,一次性依次向客户端发送6篇文章
+            for(int i = 1; i <= 6; ++i)
+            {
+                std::string article = std::to_string(i) + ".txt";
+                std::cout << "article is :" <<  article << std::endl;
+                int filefd = open(article.c_str(), O_RDONLY);
+                if(filefd < 0)
+                    std::cout << "open file error!\n";
+                else
+                {
+                    struct stat stat_buf;
+                    fstat(filefd, &stat_buf);
+                    std::string size = std::to_string(stat_buf.st_size);
+                    std::string response = "size:" + size;
+                    std::cout << "send " << send(connfd, response.c_str(), 20, 0) << " bytes with head.\n";
+                    auto sendBytes = sendfile(connfd, filefd, NULL, stat_buf.st_size);
+                    if(sendBytes < 0)
+                        std::cout << "send file error!\n";
+                    else
+                        std::cout << "send " << sendBytes << " bytes from file.\n";
+                }
+            }
+
         }
 
      /* unsigned long tid = pthread_self();

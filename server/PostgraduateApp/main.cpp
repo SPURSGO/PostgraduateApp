@@ -15,14 +15,16 @@ using namespace std;
  *  特别是，多线程在竞争同一资源时，要正确的加锁和解锁(可以加注释以做标记).
  */
 
-int main(int argc, char **argv )
+
+/* 本服务器在环回地址上开放的端口号为：9001 */
+int main()
 {
+//    int argc, char **argv
 //    if( argc < 3 )
 //    {
 //        printf("usage: %s <ip> <port>\n", argv[0]);
 //        return 1;
 //    }
-
 
     int epollfd = epoll_create(100);
     /* 初始化监听socket */
