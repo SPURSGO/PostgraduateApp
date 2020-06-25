@@ -2,6 +2,7 @@
 #include <network.h>
 #include <iostream>
 #include <string>
+#include <error.h>
 
 
 Q_INVOKABLE void Networkmanage::connect_server()  //进行网络连接
@@ -66,3 +67,50 @@ Q_INVOKABLE QString& Networkmanage::receive_article()
 {
 
 }
+
+Q_INVOKABLE bool Networkmanage::sendsingal()
+{
+    std::string ask = "article * *";
+    return send(socketfd,ask.c_str(),ask.size(),0);
+}
+
+Q_INVOKABLE int Networkmanage::receive_size()
+{
+    int size_fd;
+    int size_get = 20;
+
+
+    if ((size_fd = readn(size_get)) < 0){
+        error(1,0,"recv failed -- receive_size");
+    }
+
+    std::string S(essay);
+    std::string size(S.substr(S.find(":")));
+    int num_size = atoi(size.c_str());
+    return num_size;
+}
+
+size_t Networkmanage::readn(size_t size)
+{
+    int length = size;
+    memset(essay,0,MaxSize);
+    char *buffer_pointer = essay;
+
+    while (length > 0) {
+        int result = recv(socketfd, buffer_pointer, length,0);
+
+        if (result < 0) {
+            if (errno == EINTR)
+                continue;     /* 考虑非阻塞的情况，这里需要再次调用read */
+            else
+                return (-1);
+        } else if (result == 0)
+            break;                /* EOF(End of File)表示套接字关闭 */
+
+        length -= result;
+        buffer_pointer += result;
+    }
+    return (size - length);        /* 返回的是实际读取的字节数*/
+}
+
+
