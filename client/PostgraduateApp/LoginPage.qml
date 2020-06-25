@@ -26,7 +26,7 @@ Page {
 
         Text {       //uniqCase
             id: title
-            text: qsTr("<b>uniq</b>") + qsTr("Cast")
+            text: qsTr("<b>Graduate</b>")
             font.family: "robotLight"
             color: mainAppColor
             anchors.horizontalCenter: parent.horizontalCenter
@@ -73,9 +73,6 @@ Page {
 
             onAccepted:
             {
-                //                var message = "Wrong username or password"
-                //                popup.popMessage = message
-                //                popup.open()
             }
         }
 
@@ -99,7 +96,6 @@ Page {
 
             onAccepted:    //槽  接受回车键的信号
             {
-
             }
         }
 
@@ -142,8 +138,9 @@ Page {
                         var message = "Landed successfully"
                         popup.popMessage = message
                         popup.open()
+                        loginSuccess()
                     }else{
-                        var message_1 = "Login failed"
+                        var message_1 = "Login failed,wrong user name or password"
                         popup.popMessage = message_1
                         popup.open()
                     }
