@@ -14,6 +14,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        data.cpp \
         main.cpp \
         network.cpp\
         fileio.cpp \
@@ -33,6 +34,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    data.h \
     network.h  \
     networkmanage.h \
     userRegister.h\

@@ -1,11 +1,14 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import JSON.Data 1.0
 
 ApplicationWindow {
     id: window
     visible: true
     width: 480
     height: 720
+
+    property alias data: data
 
     FontLoader {          //加载字体
         id: robotoLight
@@ -47,7 +50,7 @@ ApplicationWindow {
                 text: qsTr("我的")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page1Form.ui.qml")
+                    stackView.push("UserInfo.qml")
                     drawer.close()
                 }
             }
@@ -55,7 +58,7 @@ ApplicationWindow {
                 text: qsTr("社区")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    stackView.push("Community.qml")
                     drawer.close()
                 }
             }
@@ -63,7 +66,7 @@ ApplicationWindow {
                 text: qsTr("日历")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    stackView.push("Calendar.qml")
                     drawer.close()
                 }
             }
@@ -71,7 +74,7 @@ ApplicationWindow {
                 text: qsTr("院校")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    stackView.push("Institution.qml")
                     drawer.close()
                 }
             }
@@ -102,21 +105,28 @@ ApplicationWindow {
     Home{
         id:mytest
         onMysignal:stackView.push(mymore)
-
     }
 
+    DataLoad{
+        id:data
+    }
+
+    Timer{
+        id:loaddata
+        interval: 10;running: true;repeat: false
+        onTriggered: data.loadData()
+    }
 
     StackView {
         id: stackView
         initialItem: mytest
         anchors.fill: parent
-//        onObjectNameChanged:
 
     }
 
     function showRegister()   //切换注册见面
     {
-        stackView.replace("qrc:/RegisterPage.qml")
+        stackView.replace("qrc:/RegisterPage.qml")        
     }
 
     function showLogin()    //从 注册界面 切换登陆 界面
@@ -125,7 +135,20 @@ ApplicationWindow {
     }
     function loginSuccess()  //登陆成功切换到个人信息页面
     {
-        stackView.replace("qrc:/Page1Form.ui.qml")
+        stackView.push("qrc:/UserInfo.qml",{status:1})
     }
 
+    function getLoginstatus()
+    {
+        return data.loginstatus;
+    }
+
+    function setLoginstatus()
+    {
+        data.loginstatus = true;
+    }
+    function savefile()
+    {
+        data.saveData();
+    }
 }

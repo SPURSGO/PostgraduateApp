@@ -1,8 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Page1Form.ui.qml</file>
-        <file>Page2Form.ui.qml</file>
+        <file>Calendar.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>Home.qml</file>
         <file>More.qml</file>
@@ -11,6 +10,10 @@
         <file>Day.qml</file>
         <file>DayTemplet.qml</file>
         <file>OneMonth.qml</file>
+        <file>UserInfo.qml</file>
+        <file>Community.qml</file>
+        <file>Institution.qml</file>
+        <file>DataLoad.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/profilePic.png</file>

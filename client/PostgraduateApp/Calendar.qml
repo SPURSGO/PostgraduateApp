@@ -5,5 +5,4 @@ Page {
     Day {
         anchors.fill: parent
     }
-
 }

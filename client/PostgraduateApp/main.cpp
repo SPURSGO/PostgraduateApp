@@ -6,7 +6,7 @@
 #include <QQuickView>
 
 #include "userRegister.h"
-
+#include "data.h"
 #include "fileio.h"
 
 
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     qmlRegisterType<FileIO>("ReadFileQML",1,0,"FileIo");
-    qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
+//    qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
     QQmlApplicationEngine engine;
 
     Networkmanage networkmange;
@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<UserRegister>("PGAPP.controls", 1, 0, "UserRegister");
     qmlRegisterType<Networkmanage>("NetWorkManage",1, 0,"NetWorkManage");
+    qmlRegisterType<Data>("JSON.Data",1,0,"Data");
 
     engine.rootContext()->setContextProperty("networkmange",&networkmange);
 

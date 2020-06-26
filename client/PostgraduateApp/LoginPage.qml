@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
+import JSON.Data 1.0
 
 Page {
     id: loginPage
@@ -11,7 +12,6 @@ Page {
     property color popupBackGroundColor: "#b44"
     property color popupTextCOlor: "#ffffff"
 
-    //    signal registerClicked()
 
     background: Rectangle {
         color: backGroundColor
@@ -56,7 +56,7 @@ Page {
         TextField {
 
             id: loginUsername
-            placeholderText: qsTr("User Name")
+            placeholderText: qsTr("请输入用户名")
             Layout.preferredWidth: title.width * 3
             Layout.alignment: Qt.AlignHCenter
             color: mainTextCOlor
@@ -78,7 +78,7 @@ Page {
 
         TextField {
             id: loginPassword
-            placeholderText: qsTr("Insert PIN")
+            placeholderText: qsTr("请输入密码")
             Layout.preferredWidth: title.width * 3
             Layout.alignment: Qt.AlignHCenter
             color: mainTextCOlor
@@ -105,7 +105,7 @@ Page {
             Layout.preferredHeight: profilePic.height
             font.pixelSize: Math.round(profilePic.height/5)
             Layout.alignment: Qt.AlignHCenter
-            text: qsTr("Sign on")
+            text: qsTr("登陆")
 
             contentItem: Text {
                 text: loginBtn.text
@@ -129,18 +129,21 @@ Page {
 
                 if(loginUsername.text=="" || loginPassword.text=="")
                 {
-                    var message_2 = "Please enter a username or password"
+                    var message_2 = "请输入用户名或密码"
                     popup.popMessage = message_2
                     popup.open()
                 }else{
                     if(networkmange.login(loginUsername.text,loginPassword.text)) //登陆成功
                     {
-                        var message = "Landed successfully"
+
+                        var message = "登陆成功"
                         popup.popMessage = message
                         popup.open()
                         logintimer.start();
+                        setLoginstatus();
+                        savefile()
                     }else{
-                        var message_1 = "Login failed,wrong user name or password"
+                        var message_1 = "登陆失败，错误的用户名或密码"
                         popup.popMessage = message_1
                         popup.open()
                     }
@@ -169,7 +172,7 @@ Page {
                     Text {
                         id: text1
                         anchors.centerIn: parent
-                        text: qsTr("Sign up>>")
+                        text: qsTr("注册>>")
                         color: "#ffffff"
                         font.underline: true
                         font.family: "微软雅黑 Light"
@@ -179,7 +182,6 @@ Page {
                 onClicked: {
                     showRegister()   //切换注册界面
                 }
-
             }
 
             Button {    //忘记密码  没有实现
@@ -194,7 +196,7 @@ Page {
                     color: "transparent"
                     Text {
                         anchors.centerIn: parent
-                        text: qsTr("forget password?")
+                        text: qsTr("忘记密码?")
                         color: "#ffffff"
                         font.family: "微软雅黑 Light"
                         font.pointSize: 11

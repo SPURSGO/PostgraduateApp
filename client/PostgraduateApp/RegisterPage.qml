@@ -46,7 +46,7 @@ Page {
         TextField {
 
             id: registerUsername
-            placeholderText: qsTr("User Name")
+            placeholderText: qsTr("请输入用户名")
 
             Layout.preferredWidth: register.sourceSize.width *4
 
@@ -74,7 +74,7 @@ Page {
 
         TextField {
             id: registerPassword
-            placeholderText: qsTr("please enter password")
+            placeholderText: qsTr("请输入密码")
 
             Layout.preferredWidth: register.sourceSize.width *4
             Layout.alignment: Qt.AlignHCenter
@@ -102,7 +102,7 @@ Page {
 
         TextField {
             id: registerPassword_copy
-            placeholderText: qsTr("Please enter the password again")
+            placeholderText: qsTr("请再次输入密码")
 
             Layout.preferredWidth: register.sourceSize.width *4
             Layout.alignment: Qt.AlignHCenter
@@ -139,7 +139,7 @@ Page {
             Layout.preferredHeight: register.height
             font.pixelSize: Math.round(register.height/5)
             Layout.alignment: Qt.AlignHCenter
-            text: qsTr("Sign up")
+            text: qsTr("注册")
 
             contentItem: Text {
                 text: regsterBtn.text
@@ -161,19 +161,19 @@ Page {
             onClicked: {  // 在本地进行一些简单的验证
                if(registerUsername.text ==="")
                 {
-                    var message_1 = "please enter user name"
+                    var message_1 = "请输入用户名"
                     popup.popMessage = message_1
                     popup.open()
                 }
                else if(registerPassword.text ==="" || registerPassword_copy.text==="")
                 {
-                    var message_2 = "Please enter the password"
+                    var message_2 = "请输入密码"
                     popup.popMessage = message_2
                     popup.open()
                 }
                else if(registerPassword.text != registerPassword_copy.text)
                 {
-                   var message = "Please ensure that the password entered twice is the same"
+                   var message = "请确保两次输入的密码一致"
                    popup.popMessage = message
                    popup.open()
                }
@@ -181,11 +181,11 @@ Page {
                {
                    if(!networkmange.register_userinfo(registerUsername.text, registerPassword.text))  //注册失败
                    {
-                       var message_3 = "The account already exists,registration failed"
+                       var message_3 = "该账户已存在，注册失败"
                        popup.popMessage = message_3
                        popup.open()
                    }else{                  //注册成功
-                       var message_4 = "registration success"
+                       var message_4 = "注册成功"
                        popup.popMessage = message_4
                        popup.open()
                        registertime.start()
@@ -209,7 +209,7 @@ Page {
         Label {
             id: label
             color: "#ffffff"
-            text: qsTr("Already have an account? Click me")
+            text: qsTr("已存在一个账户，点我")
             font.pointSize: 11
             font.family: "微软雅黑 Light"
         }
@@ -226,7 +226,7 @@ Page {
                 Text {
                     id:text2
                     anchors.centerIn: parent
-                    text: qsTr("Sign in")
+                    text: qsTr("登陆")
                     color: "white"
                     font.underline: true
                     font.family: "微软雅黑"
