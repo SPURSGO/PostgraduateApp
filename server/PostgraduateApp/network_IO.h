@@ -191,7 +191,7 @@ void* worker(void *)
                 }
             }
             // 向客户端传输视频资源
-            sendVideo(connfd, "video1.mp4");
+//            sendVideo(connfd, "video1.mp4");
         }
 
      /* unsigned long tid = pthread_self();

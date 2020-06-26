@@ -9,6 +9,7 @@
 #include <string.h>
 #include <netinet/in.h>
 #include <string>
+#include <iostream>
 
 #define MAXLINE 409600
 
@@ -39,6 +40,7 @@ void sendVideo(int sockfd, const char *filename)
     // 可以考虑设置以块大小的缓冲区(4096B),然后根据读入字节数循环发送完整个数据
     char  buffer[MAXLINE];
     int   len;
+
     memset(buffer,'\0',sizeof(buffer));
     while(!feof(fq)){
         // 实参说明
