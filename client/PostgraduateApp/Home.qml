@@ -7,7 +7,7 @@ Page{
     id:root
     signal mysignal
     property alias modelindex: listView.currentIndex
-    title:("Home")
+    title:("经验分享")
 
     Rectangle {
         width: parent.width

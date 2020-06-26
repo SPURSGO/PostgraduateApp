@@ -188,7 +188,7 @@ Page {
                        var message_4 = "registration success"
                        popup.popMessage = message_4
                        popup.open()
-                       showLogin()
+                       registertime.start()
                    }
                }
             }
@@ -269,6 +269,12 @@ Page {
         id: popupClose
         interval: 3000
         onTriggered: popup.close()
+    }
+
+    Timer{
+        id:registertime
+        interval: 2000
+        onTriggered: showLogin()
     }
 
 }

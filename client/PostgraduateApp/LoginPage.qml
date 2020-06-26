@@ -138,7 +138,7 @@ Page {
                         var message = "Landed successfully"
                         popup.popMessage = message
                         popup.open()
-                        loginSuccess()
+                        logintimer.start();
                     }else{
                         var message_1 = "Login failed,wrong user name or password"
                         popup.popMessage = message_1
@@ -235,9 +235,10 @@ Page {
         onTriggered: popup.close()
     }
 
-
-
-
-
+    Timer{
+        id:logintimer
+        interval: 2000
+        onTriggered: loginSuccess()
+    }
 
 }
