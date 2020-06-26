@@ -23,6 +23,23 @@
         <file>images/tx4.jpg</file>
         <file>images/tx5.jpg</file>
         <file>images/tx6.jpg</file>
+        <file>images/user.jpg</file>
+        <file>../../../root/tupian/icon8.png</file>
+        <file>../../../root/tupian/icon7.png</file>
+        <file>../../../root/tupian/icon6.png</file>
+        <file>../../../root/tupian/icon5.png</file>
+        <file>../../../root/tupian/icon4.png</file>
+        <file>../../../root/tupian/icon3.png</file>
+        <file>../../../root/tupian/icon2.png</file>
+        <file>../../../root/tupian/icon1.png</file>
+        <file>images/icon8.png</file>
+        <file>images/icon7.png</file>
+        <file>images/icon6.png</file>
+        <file>images/icon5.png</file>
+        <file>images/icon4.png</file>
+        <file>images/icon3.png</file>
+        <file>images/icon2.png</file>
+        <file>images/icon1.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/roboto-light.ttf</file>
