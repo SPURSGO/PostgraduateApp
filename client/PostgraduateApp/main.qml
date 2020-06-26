@@ -95,7 +95,8 @@ ApplicationWindow {
     }
     More{
         id:mymore
-        text:mytest.gettext(mytest.modelindex)
+        text1_txt:mytest.gettext(mytest.modelindex)  //从 home 接收文档
+        text2_txt: mytest.gettext(mytest.modelindex)
     }
 
     Home{

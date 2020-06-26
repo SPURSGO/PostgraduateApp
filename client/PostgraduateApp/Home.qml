@@ -123,10 +123,11 @@ Page{
             Timer{
                 interval: 100;running:true;repeat: false
                 onTriggered:{
-                    networkmange.sendsingal()
+                    networkmange.sendsingal()  //向服务器发送信号 ，请求接收 文章和视频
                     for(var i=0;i<6;i++){
-                        change_id_model_modeltext(i)
+                        change_id_model_modeltext(i)  //接收文章
                     }
+                    networkmange.receive_vedio()  //接受
                 }
             }
         }
@@ -140,6 +141,5 @@ Page{
 
     function change_id_model_modeltext(n){
         id_model.get(n).modeltext=networkmange.receive_article()
-//        id_model.get(n).imagesource="/images/images/profilePic.png"
     }
 }
