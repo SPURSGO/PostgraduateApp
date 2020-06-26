@@ -57,9 +57,10 @@ Q_INVOKABLE bool Networkmanage::login(const QString &username, const QString &pw
 
     memset(status, '\0', MaxSize);  //初始化
 
-    recv(socketfd,status,10,0);  //接受服务器回应 进行判断 用户名是否存在,密码是否正确
-
+    recv(socketfd,status,MaxSize,0);  //接受服务器回应 进行判断 用户名是否存在,密码是否正确
+    printf("status:  %s\n",status);
     std::string result(status);
+//    std::cout<<result<<std::endl;
 
     return result == "OK!";
 }
@@ -108,27 +109,23 @@ Q_INVOKABLE bool Networkmanage::receive_vedio()  //接受视频
         //        exit(1);
     }
 
+    int vedio_size =receive_size();
 
-    int n;
-    while(1){
-         memset(essay,'\0', MaxPlus);
-        // 注意：send/recv均是向其自身所在主机的协议栈内核缓冲区中读写数据
-        // 实际的数据收发是由内核协议栈本身实现的
-        n = recv(socketfd, essay, MaxPlus, 0);
-        if(n == 0)
+
+    int size =0;
+    while(vedio_size){
+
+        if(vedio_size>MaxPlus)
         {
-            printf("n == 0, close connect.\n");
-            break;
+            size = readn(MaxPlus);
+        }else{
+            size = readn(vedio_size);
         }
-        else if( n < 0)
-        {   // errno : #define	EFAULT		14	/* Bad address */
-            printf("ERR: errno is %d\n", errno);
-            break;
-        }
+        vedio_size -=size;
 
-        fwrite(essay, 1, n, fp);
+        fwrite(essay, 1, size, fp);
     }
-    essay[n] = '\0';
+    essay[size] = '\0';
     fclose(fp);
 }
 

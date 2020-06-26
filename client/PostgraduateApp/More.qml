@@ -37,7 +37,7 @@ Page{
 
                 MediaPlayer{
                     id:player
-                    source:"file:///run/media/root/343c117f-ca55-4783-9631-a7a6c5c319cf/lost+found/qml+c++/Vedio_play/example.mp4"   //文件路径
+                    source:"file:///run/media/root/Date/OpenSource/build/PostgraduateApp/client/build-PostgraduateApp-C_C_Qt_Application_5_14_1-Debug/newVideo.mp4"   //文件路径
                     autoPlay: false  //默认不播放
                 }
 
