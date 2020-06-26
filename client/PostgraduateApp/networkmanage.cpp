@@ -10,7 +10,7 @@ Q_INVOKABLE void Networkmanage::connect_server()  //进行网络连接
 {
     if((socketfd=socket(PF_INET,SOCK_STREAM,0))==-1)   //创建和服务器连接的套接字
     {
-       /* fprintf(stderr,"Socket error:%s\n\a",strerror(errno));*/
+        /* fprintf(stderr,"Socket error:%s\n\a",strerror(errno));*/
         std::cerr<<"Socked error:"<<strerror(errno)<<std::endl;    //打印错误信息
         exit(1);
     }
@@ -27,7 +27,7 @@ Q_INVOKABLE void Networkmanage::connect_server()  //进行网络连接
 
     if(getConnect(socketfd, serv, sizeof (serv)) != -1)  //连接服务器
     {
-         std::cerr<<"Connect error:"<<strerror(errno)<<std::endl;    //打印错误信息
+        std::cerr<<"Connect error:"<<strerror(errno)<<std::endl;    //打印错误信息
     }
 
 }
@@ -96,6 +96,40 @@ Q_INVOKABLE int Networkmanage::receive_size()
     int num_size = atoi(size.c_str());
     std::cout<<num_size<<std::endl;
     return num_size;
+}
+
+Q_INVOKABLE bool Networkmanage::receive_vedio()  //接受视频
+{
+    FILE *fp;
+    // 注意ab和wb的区别， a是追加，w是覆写(即将原文件截断为0之后再写)
+    if((fp = fopen("newVideo.mp4","ab") ) == NULL )
+    {
+        printf("File open file.\n");
+        //        exit(1);
+    }
+
+
+    int n;
+    while(1){
+         memset(essay,'\0', MaxPlus);
+        // 注意：send/recv均是向其自身所在主机的协议栈内核缓冲区中读写数据
+        // 实际的数据收发是由内核协议栈本身实现的
+        n = recv(socketfd, essay, MaxPlus, 0);
+        if(n == 0)
+        {
+            printf("n == 0, close connect.\n");
+            break;
+        }
+        else if( n < 0)
+        {   // errno : #define	EFAULT		14	/* Bad address */
+            printf("ERR: errno is %d\n", errno);
+            break;
+        }
+
+        fwrite(essay, 1, n, fp);
+    }
+    essay[n] = '\0';
+    fclose(fp);
 }
 
 size_t Networkmanage::readn(size_t size)

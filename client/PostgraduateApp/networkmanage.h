@@ -25,6 +25,8 @@ public:
 
     Q_INVOKABLE int receive_size(); // 接受文章大小
 
+    Q_INVOKABLE bool receive_vedio();
+
     size_t readn(size_t size);
 private:
     int socketfd;   //
