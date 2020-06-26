@@ -18,6 +18,7 @@
 #include <sys/stat.h>
 #include <sys/sendfile.h>
 #include "redis_storage.h"
+#include "video_translate.h"
 
 /* 请求队列，线程共享 */
 static std::list<int> request_queue;
@@ -189,7 +190,8 @@ void* worker(void *)
                         std::cout << "send " << sendBytes << " bytes from file.\n";
                 }
             }
-
+            // 向客户端传输视频资源
+            sendVideo(connfd, "video1.mp4");
         }
 
      /* unsigned long tid = pthread_self();
