@@ -102,6 +102,7 @@ ApplicationWindow {
     Home{
         id:mytest
         onMysignal:stackView.push(mymore)
+
     }
 
 
@@ -109,6 +110,8 @@ ApplicationWindow {
         id: stackView
         initialItem: mytest
         anchors.fill: parent
+//        onObjectNameChanged:
+
     }
 
     function showRegister()   //切换注册见面

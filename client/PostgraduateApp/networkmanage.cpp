@@ -57,9 +57,14 @@ Q_INVOKABLE bool Networkmanage::login(const QString &username, const QString &pw
 
     memset(status, '\0', MaxSize);  //初始化
 
-    recv(socketfd,status,10,0);  //接受服务器回应 进行判断 用户名是否存在,密码是否正确
+    int n =recv(socketfd,status,4,0);  //接受服务器回应 进行判断 用户名是否存在,密码是否正确
 
+    std::cout<<n<<std::endl;
+
+
+//    printf("status:  %s\n",status);
     std::string result(status);
+    std::cout<<result<<std::endl;
 
     return result == "OK!";
 }
@@ -90,11 +95,11 @@ Q_INVOKABLE int Networkmanage::receive_size()
     }
 
     std::string S(essay);
-    std::cout << S << std::endl;
+
     std::string size(S.substr(S.find(":")+1));
-    std::cout<<size<<std::endl;
+
     int num_size = atoi(size.c_str());
-    std::cout<<num_size<<std::endl;
+
     return num_size;
 }
 
@@ -102,34 +107,59 @@ Q_INVOKABLE bool Networkmanage::receive_vedio()  //接受视频
 {
     FILE *fp;
     // 注意ab和wb的区别， a是追加，w是覆写(即将原文件截断为0之后再写)
-    if((fp = fopen("newVideo.mp4","ab") ) == NULL )
-    {
-        printf("File open file.\n");
-        //        exit(1);
-    }
+//    if((fp = fopen("newVideo.mp4","ab") ) == NULL )
+//    {
+//        printf("File open file.\n");
+//        //        exit(1);
+//    }
+
+//    int vedio_size =receive_size();
+
+//    std::cout<<vedio_size<<std::endl;
+//    int size =0;
+//    while(vedio_size){
+
+//        if(vedio_size>MaxPlus)
+//        {
+//            size = readn(MaxPlus);
+//        }else{
+//            size = readn(vedio_size);
+//        }
+//        vedio_size -=size;
+
+//        fwrite(essay, 1, size, fp);
+//    }
 
 
-    int n;
-    while(1){
-         memset(essay,'\0', MaxPlus);
-        // 注意：send/recv均是向其自身所在主机的协议栈内核缓冲区中读写数据
-        // 实际的数据收发是由内核协议栈本身实现的
-        n = recv(socketfd, essay, MaxPlus, 0);
-        if(n == 0)
-        {
-            printf("n == 0, close connect.\n");
-            break;
-        }
-        else if( n < 0)
-        {   // errno : #define	EFAULT		14	/* Bad address */
-            printf("ERR: errno is %d\n", errno);
-            break;
-        }
+//    int rs =1;
+//    int n;
+//    while(rs)
+//    {
+//        n = recv(socketfd, essay, sizeof(essay), 0);
+//        if(n < 0)
+//        {
+//            // 由于是非阻塞的模式,所以当buflen为EAGAIN时,表示当前缓冲区已无数据可读
+//            // 在这里就当作是该次事件已处理
+//            if(n == EAGAIN)
+//                break;
+//            else
+//                return false;
+//        }
+//        else if(n == 0)
+//        {
+//            // 这里表示对端的socket已正常关闭.
+//        }
 
-        fwrite(essay, 1, n, fp);
-    }
-    essay[n] = '\0';
-    fclose(fp);
+//        if(n != sizeof(essay))
+//            rs = 0;
+//        else{
+//            rs = 1;// 需要再次读取
+//        }
+//        fwrite(essay, 1, size, fp);
+//    }
+
+//    fclose(fp);
+    return true;
 }
 
 size_t Networkmanage::readn(size_t size)

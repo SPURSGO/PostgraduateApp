@@ -138,13 +138,13 @@ void* worker(void *)
             {
                 std::string result = "OK!";
                 std::cout << result << std::endl;
-                send(connfd, result.c_str(), result.size(), 0);
+                std::cout << "send " << send(connfd, result.c_str(), result.size(), 0) << " bytes\n";
             }
             else
             {
                 std::string result = "ERROR!";
                 std::cout << result << std::endl;
-                send(connfd, result.c_str(), result.size(), 0);
+                std::cout << "send " << send(connfd, result.c_str(), result.size(), 0) << " bytes\n";
             }
         }
         else if(requestType == "login")
@@ -156,13 +156,13 @@ void* worker(void *)
             {
                 std::string result = "OK!";
                 std::cout << result << std::endl;
-                send(connfd, result.c_str(), result.size(), 0);
+                std::cout << "send " << send(connfd, result.c_str(), result.size(), 0) << " bytes\n";
             }
             else
             {
                 std::string result = "ERROR!";
                 std::cout << result << std::endl;
-                send(connfd, result.c_str(), result.size(), 0);
+                std::cout << "send " << send(connfd, result.c_str(), result.size(), 0) << " bytes\n";
             }
         }
         else if(requestType == "article")
@@ -191,7 +191,7 @@ void* worker(void *)
                 }
             }
             // 向客户端传输视频资源
-            sendVideo(connfd, "video1.mp4");
+//            sendVideo(connfd, "video1.mp4");
         }
 
      /* unsigned long tid = pthread_self();

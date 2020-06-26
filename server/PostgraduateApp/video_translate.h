@@ -8,6 +8,8 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <netinet/in.h>
+#include <string>
+#include <iostream>
 
 #define MAXLINE 409600
 
@@ -31,11 +33,14 @@ void sendVideo(int sockfd, const char *filename)
     struct stat file_status;
     fstat(filefd, &file_status);
     printf("video file's size: %ld\n", file_status.st_size);
-
+    std::string video_size = std::to_string(file_status.st_size);
+    std::string response = "size:" + video_size;
+    send(sockfd, response.c_str(), 20, 0);
 
     // 可以考虑设置以块大小的缓冲区(4096B),然后根据读入字节数循环发送完整个数据
     char  buffer[MAXLINE];
     int   len;
+
     memset(buffer,'\0',sizeof(buffer));
     while(!feof(fq)){
         // 实参说明
