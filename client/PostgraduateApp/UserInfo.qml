@@ -6,7 +6,11 @@ import JSON.Data 1.0
 Page {
     property alias _mask: _mask
     property alias but: but
-
+    background: Image {
+        id: back_ground_image
+        source:"qrc:/images/images/background.jpg"
+        opacity: 0.7
+    }
     Column {
         id: column
         x:3
@@ -22,6 +26,7 @@ Page {
             radius: width/2
             //color: "black"
 
+
             Image {
                 id: _user
                 smooth: true
@@ -29,6 +34,17 @@ Page {
                 anchors.fill: parent
                 source: "qrc:/images/images/user.jpg"
                 antialiasing: true
+//                MouseArea {
+//                    anchors.fill: parent
+//                    enabled: true
+//                    onClicked: {
+//                    if (_mask.state === "user1")
+//                         { _mask.state = "user2"}
+//                    else
+//                        { _mask.state = "user1"}
+//                  console.log("clicked")
+//                    }
+//                }
             }
             Rectangle {
                 id: _mask
@@ -37,6 +53,37 @@ Page {
                 visible: false
                 antialiasing: true
                 smooth: true
+                state: "user1"
+                states: [
+                         State {
+                             name: "user1"
+//                             when: mouse.pressed
+                             //PropertyChanges { target: signal; color: "green"}
+                             PropertyChanges { target: _user; source: "qrc:/images/images/user2.jpg"}
+                         },
+                         State {
+                             name: "user2"
+
+//                             when: mouse.pressed
+                          //   PropertyChanges { target: signal; color: "red"}
+                             PropertyChanges { target: _user; source: "qrc:/images/images/user.jpg"}
+                         }
+                     ]
+
+
+            }
+            MouseArea {
+                id:mouse
+                anchors.fill: _mask
+                enabled: true
+                preventStealing:true
+                onClicked: {
+                if (_mask.state === "user1")
+                     { _mask.state = "user2"}
+                else
+                    { _mask.state = "user1"}
+              console.log("clicked")
+                }
             }
             OpacityMask {
                 id:mask_image
@@ -46,9 +93,38 @@ Page {
                 visible: true
                 antialiasing: true
             }
+
+
+                //anchors.left: _mask.anchors.right
+            Label{
+                    id:label
+                    anchors.left: _mask.right
+                    anchors.bottom: _mask.bottom
+                    text: "用户名"
+                    font.pixelSize: 15//字体大小
+                }
+
+             TextEdit {
+                    id:nameText
+                    anchors.left: label.right
+                    anchors.bottom: label.bottom
+                    anchors.leftMargin: 5
+                   // anchors.top: label.top
+                   // anchors.topMargin: -7
+
+                    //text: qsTr("Enter username")
+
+                    font.pixelSize: 15
+                }
+
+
             Button{
                 id:but
-                text:getLoginstatus() ?"登出" :"未登陆"
+
+//                text:getLoginstatus() ?"登出" :"未登陆"
+
+                text:getLoginstatus()?"已登录" :"未登陆"
+
                 anchors.left: _mask.right
                 enabled: !getLoginstatus()
                 onClicked:{
@@ -57,6 +133,16 @@ Page {
                 }
                 anchors.leftMargin: 5
             }
+//            Button{
+//                id:change_image
+//                text:"change  image"
+//                anchors.left: _mask.right
+//               // enabled: !getLoginstatus()
+//                onClicked:{
+//                   _user.source="qrc:/images/images/user2.jpg"
+//                }
+//                anchors.leftMargin: 5
+//            }
         }
         Button{
             width: parent.width
@@ -65,7 +151,7 @@ Page {
             flat: true
             background: Rectangle {
                 anchors.fill: parent
-                color: "#FFFF6F"
+                color: "#F0E68C"
                 Text {
                     anchors.centerIn: parent
                     text: qsTr("考研会员，更多权益")
