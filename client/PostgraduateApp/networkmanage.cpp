@@ -57,7 +57,7 @@ Q_INVOKABLE bool Networkmanage::login(const QString &username, const QString &pw
 
     memset(status, '\0', MaxSize);  //初始化
 
-    int n =recv(socketfd,status,4,0);  //接受服务器回应 进行判断 用户名是否存在,密码是否正确
+    int n =recv(socketfd,status,20,0);  //接受服务器回应 进行判断 用户名是否存在,密码是否正确
 
     std::cout<<n<<std::endl;
 

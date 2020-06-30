@@ -7,7 +7,8 @@ Page{
     id:root
     signal mysignal
     property alias modelindex: listView.currentIndex
-    title:("Home")
+    title:("经验分享")
+
 
     Rectangle {
         width: parent.width
@@ -26,7 +27,7 @@ Page{
             ListElement{
                 modeltext:""
                 imagesource: "qrc:/images/images/tx2.jpg"
-                index:1
+                index:1                
             }
             ListElement{
                 modeltext:""
@@ -128,6 +129,7 @@ Page{
                         change_id_model_modeltext(i)  //接收文章
                     }
 //                    networkmange.receive_vedio()  //接受
+
                 }
             }
         }
