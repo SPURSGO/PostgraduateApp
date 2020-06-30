@@ -270,11 +270,7 @@ Item {
                         year: data_year
                         month: data_month
                     }
-
                 }
-
-
-
             }
         }
     }

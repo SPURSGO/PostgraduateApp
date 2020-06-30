@@ -13,7 +13,6 @@
         <file>UserInfo.qml</file>
         <file>Community.qml</file>
         <file>Institution.qml</file>
-        <file>DataLoad.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/profilePic.png</file>

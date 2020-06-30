@@ -5,16 +5,16 @@ import QtQuick.Layouts 1.1
 
 Page{
     property alias text1_txt: text1.text
-    property alias text2_txt: text2.text
+//    property alias text2_txt: text2.text
 
     title:("More")
 
     Flickable{
         id:myflickable
         width: parent.width
-        height: parent.height/2
+        height: parent.height*2
         contentWidth: parent.width
-        contentHeight: 2000
+        contentHeight: 7000
         flickableDirection: Flickable.VerticalFlick
 
 
@@ -66,13 +66,13 @@ Page{
                 }
             }
 
-            Text {
-                id:text2
-                width:parent.width
+//            Text {
+//                id:text2
+//                width:parent.width
 
-                wrapMode:Text.WordWrap
-                font.pixelSize: 20
-            }
+//                wrapMode:Text.WordWrap
+//                font.pixelSize: 20
+//            }
         }
     }
 }

@@ -25,7 +25,7 @@ Q_INVOKABLE void Networkmanage::connect_server()  //进行网络连接
     serv.sin_port = htons(port);
 
 
-    if(getConnect(socketfd, serv, sizeof (serv)) != -1)  //连接服务器
+    if(getConnect(socketfd, serv, sizeof (serv)) == -1)  //连接服务器
     {
         std::cerr<<"Connect error:"<<strerror(errno)<<std::endl;    //打印错误信息
     }

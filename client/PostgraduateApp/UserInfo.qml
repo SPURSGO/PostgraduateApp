@@ -48,7 +48,7 @@ Page {
             }
             Button{
                 id:but
-                text:getLoginstatus() ?"已登录" :"未登陆"
+                text:getLoginstatus() ?"登出" :"未登陆"
                 anchors.left: _mask.right
                 enabled: !getLoginstatus()
                 onClicked:{

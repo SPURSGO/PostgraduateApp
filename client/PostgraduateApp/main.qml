@@ -99,7 +99,7 @@ ApplicationWindow {
     More{
         id:mymore
         text1_txt:mytest.gettext(mytest.modelindex)  //从 home 接收文档
-        text2_txt: mytest.gettext(mytest.modelindex)
+//        text2_txt: mytest.gettext(mytest.modelindex)
     }
 
     Home{
@@ -107,7 +107,7 @@ ApplicationWindow {
         onMysignal:stackView.push(mymore)
     }
 
-    DataLoad{
+    Data{
         id:data
     }
 
