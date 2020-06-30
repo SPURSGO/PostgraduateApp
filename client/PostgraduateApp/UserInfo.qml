@@ -51,22 +51,30 @@ Page {
                 visible: true
                 antialiasing: true
             }
-            TextField {
 
-                id: loginUsername
-                placeholderText: qsTr("请输入用户名")
-                color: mainTextCOlor
-                font.pixelSize: Math.round(profilePic.height/5)
-                font.family: "robotLight"
-                leftPadding: 30
-                background: Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
+
+                //anchors.left: _mask.anchors.right
+            Label{
+                    id:label
+                    anchors.left: _mask.right
+                    anchors.bottom: _mask.bottom
+                    text: "用户名"
+                    font.pixelSize: 15//字体大小
                 }
-            }
+
+             TextEdit {
+                    id:nameText
+                    anchors.left: label.right
+                    anchors.bottom: label.bottom
+                    anchors.leftMargin: 5
+                   // anchors.top: label.top
+                   // anchors.topMargin: -7
+
+                    //text: qsTr("Enter username")
+                    font.pixelSize: 15
+                }
+
+
             Button{
                 id:but
                 text:getLoginstatus()?"已登录" :"未登陆"
@@ -78,6 +86,7 @@ Page {
                 }
                 anchors.leftMargin: 5
             }
+
         }
         Button{
             width: parent.width
