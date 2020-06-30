@@ -34,6 +34,17 @@ Page {
                 anchors.fill: parent
                 source: "qrc:/images/images/user.jpg"
                 antialiasing: true
+//                MouseArea {
+//                    anchors.fill: parent
+//                    enabled: true
+//                    onClicked: {
+//                    if (_mask.state === "user1")
+//                         { _mask.state = "user2"}
+//                    else
+//                        { _mask.state = "user1"}
+//                  console.log("clicked")
+//                    }
+//                }
             }
             Rectangle {
                 id: _mask
@@ -42,6 +53,37 @@ Page {
                 visible: false
                 antialiasing: true
                 smooth: true
+                state: "user1"
+                states: [
+                         State {
+                             name: "user1"
+//                             when: mouse.pressed
+                             //PropertyChanges { target: signal; color: "green"}
+                             PropertyChanges { target: _user; source: "qrc:/images/images/user2.jpg"}
+                         },
+                         State {
+                             name: "user2"
+
+//                             when: mouse.pressed
+                          //   PropertyChanges { target: signal; color: "red"}
+                             PropertyChanges { target: _user; source: "qrc:/images/images/user.jpg"}
+                         }
+                     ]
+
+
+            }
+            MouseArea {
+                id:mouse
+                anchors.fill: _mask
+                enabled: true
+                preventStealing:true
+                onClicked: {
+                if (_mask.state === "user1")
+                     { _mask.state = "user2"}
+                else
+                    { _mask.state = "user1"}
+              console.log("clicked")
+                }
             }
             OpacityMask {
                 id:mask_image
@@ -71,6 +113,7 @@ Page {
                    // anchors.topMargin: -7
 
                     //text: qsTr("Enter username")
+
                     font.pixelSize: 15
                 }
 
@@ -86,7 +129,16 @@ Page {
                 }
                 anchors.leftMargin: 5
             }
-
+//            Button{
+//                id:change_image
+//                text:"change  image"
+//                anchors.left: _mask.right
+//               // enabled: !getLoginstatus()
+//                onClicked:{
+//                   _user.source="qrc:/images/images/user2.jpg"
+//                }
+//                anchors.leftMargin: 5
+//            }
         }
         Button{
             width: parent.width
