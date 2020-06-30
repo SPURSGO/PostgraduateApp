@@ -35,6 +35,7 @@
         <file>images/icon3.png</file>
         <file>images/icon2.png</file>
         <file>images/icon1.png</file>
+        <file>images/background.jpg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/roboto-light.ttf</file>

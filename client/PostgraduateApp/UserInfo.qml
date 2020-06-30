@@ -6,7 +6,11 @@ import JSON.Data 1.0
 Page {
     property alias _mask: _mask
     property alias but: but
-
+    background: Image {
+        id: back_ground_image
+        source:"qrc:/images/images/background.jpg"
+        opacity: 0.7
+    }
     Column {
         id: column
         x:3
@@ -21,6 +25,7 @@ Page {
             height: 150
             radius: width/2
             //color: "black"
+
 
             Image {
                 id: _user
@@ -46,6 +51,22 @@ Page {
                 visible: true
                 antialiasing: true
             }
+            TextField {
+
+                id: loginUsername
+                placeholderText: qsTr("请输入用户名")
+                color: mainTextCOlor
+                font.pixelSize: Math.round(profilePic.height/5)
+                font.family: "robotLight"
+                leftPadding: 30
+                background: Rectangle {
+                    width: parent.width - 10
+                    height: 1
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    color: mainAppColor
+                }
+            }
             Button{
                 id:but
                 text:getLoginstatus()?"已登录" :"未登陆"
@@ -65,7 +86,7 @@ Page {
             flat: true
             background: Rectangle {
                 anchors.fill: parent
-                color: "#FFFF6F"
+                color: "#F0E68C"
                 Text {
                     anchors.centerIn: parent
                     text: qsTr("考研会员，更多权益")
