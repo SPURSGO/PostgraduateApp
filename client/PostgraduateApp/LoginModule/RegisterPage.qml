@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.1
 
 
 Page {
+    title:("注册")
     id: registerPage
 
     property color backGroundColor : "#353535"  //背景颜色

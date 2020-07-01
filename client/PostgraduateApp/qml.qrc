@@ -1,18 +1,19 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Calendar.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>Home.qml</file>
-        <file>More.qml</file>
-        <file>LoginPage.qml</file>
-        <file>RegisterPage.qml</file>
-        <file>Day.qml</file>
-        <file>DayTemplet.qml</file>
-        <file>OneMonth.qml</file>
-        <file>UserInfo.qml</file>
-        <file>Community.qml</file>
-        <file>Institution.qml</file>
+        <file>CommunityModule/Community.qml</file>
+        <file>DayModule/Calendar.qml</file>
+        <file>DayModule/Day.qml</file>
+        <file>DayModule/DayTemplet.qml</file>
+        <file>DayModule/OneMonth.qml</file>
+        <file>HomeModule/Home.qml</file>
+        <file>HomeModule/More.qml</file>
+        <file>MyModule/UserInfo.qml</file>
+        <file>LoginModule/RegisterPage.qml</file>
+        <file>LoginModule/LoginPage.qml</file>
+        <file>AcademyModule/Institution.qml</file>
+        <file>HomeModule/MediaButton.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/profilePic.png</file>
@@ -36,6 +37,11 @@
         <file>images/icon1.png</file>
         <file>images/background.jpg</file>
         <file>images/user2.jpg</file>
+        <file>images/back.png</file>
+        <file>images/pause.png</file>
+        <file>images/quick.png</file>
+        <file>images/quict.png</file>
+        <file>images/start.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/roboto-light.ttf</file>

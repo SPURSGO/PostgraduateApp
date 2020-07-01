@@ -4,6 +4,8 @@ import QtGraphicalEffects 1.0
 import JSON.Data 1.0
 
 Page {
+    title:("个人信息")
+
     property alias _mask: _mask
     property alias but: but
     background: Image {

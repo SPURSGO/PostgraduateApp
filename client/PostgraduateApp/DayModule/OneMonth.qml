@@ -69,7 +69,7 @@ Item {
             model:dayList
             delegate:
                 DayTemplet{
-                exclusiveGroup:buttonGroup  //1.4里面的属性
+                exclusiveGroup:buttonGroup
                 width: grid.width/7-1
                 height: grid.height/6-1
                 number:year == nowDate.getFullYear()?month == nowDate.getMonth()?modelData==nowDate.getDate()?"今":modelData:modelData:modelData

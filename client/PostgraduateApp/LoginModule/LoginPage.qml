@@ -6,6 +6,7 @@ import JSON.Data 1.0
 Page {
     id: loginPage
 
+    title:("登陆")
     property color backGroundColor : "#353535"  //背景颜色
     property color mainAppColor: "#ffffff"
     property color mainTextCOlor: "#f0f0f0"
