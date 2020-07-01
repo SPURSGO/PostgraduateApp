@@ -13,6 +13,7 @@
         <file>LoginModule/RegisterPage.qml</file>
         <file>LoginModule/LoginPage.qml</file>
         <file>AcademyModule/Institution.qml</file>
+        <file>HomeModule/MediaButton.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/profilePic.png</file>
@@ -36,6 +37,11 @@
         <file>images/icon1.png</file>
         <file>images/background.jpg</file>
         <file>images/user2.jpg</file>
+        <file>images/back.png</file>
+        <file>images/pause.png</file>
+        <file>images/quick.png</file>
+        <file>images/quict.png</file>
+        <file>images/start.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/roboto-light.ttf</file>
