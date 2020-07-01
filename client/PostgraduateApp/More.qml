@@ -32,7 +32,7 @@ Page{
 
             Rectangle{
                 width: parent.width
-                height: parent.height/4
+                height: 300
                 color: "black"
 
                 MediaPlayer{
