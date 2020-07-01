@@ -58,14 +58,14 @@ Page {
                          State {
                              name: "user1"
 //                             when: mouse.pressed
-                             //PropertyChanges { target: signal; color: "green"}
+
                              PropertyChanges { target: _user; source: "qrc:/images/images/user2.jpg"}
                          },
                          State {
                              name: "user2"
 
 //                             when: mouse.pressed
-                          //   PropertyChanges { target: signal; color: "red"}
+
                              PropertyChanges { target: _user; source: "qrc:/images/images/user.jpg"}
                          }
                      ]
