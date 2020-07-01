@@ -4,6 +4,8 @@ import QtGraphicalEffects 1.0
 import JSON.Data 1.0
 
 Page {
+    title:("个人信息")
+
     property alias _mask: _mask
     property alias but: but
     background: Image {
@@ -120,7 +122,11 @@ Page {
 
             Button{
                 id:but
+
+//                text:getLoginstatus() ?"登出" :"未登陆"
+
                 text:getLoginstatus()?"已登录" :"未登陆"
+
                 anchors.left: _mask.right
                 enabled: !getLoginstatus()
                 onClicked:{

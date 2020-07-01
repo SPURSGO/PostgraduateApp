@@ -1,5 +1,12 @@
 postgraduate app server.
 
+acl的安装
+生成动态库时注意编译顺序（依赖关系）
+redis的安装
+redis安装注意：
+服务器在后台运行，将conf文件中的damonize属性改为yes
+
+
 members:
 瞿信
 张煜青

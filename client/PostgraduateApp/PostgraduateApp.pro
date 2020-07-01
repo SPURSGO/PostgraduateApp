@@ -37,7 +37,6 @@ HEADERS += \
     data.h \
     network.h  \
     networkmanage.h \
-    userRegister.h\
     fileio.h
 #LIBS += -L/usr/lib/ -lpthread
 

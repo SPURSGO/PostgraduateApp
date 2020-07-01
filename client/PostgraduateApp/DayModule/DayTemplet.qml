@@ -8,7 +8,7 @@ Button {
     height: 100
     property var number: 01 //显示的数字
     property var beClicked:false //是否被点击过
-    property var isPass: true //是否已经过了，用来设置文字的颜色。没过为灰色，不可点击，过了的为白色
+    property var isPass: true //是否已经过了，用来设置文字的颜色。没过为蓝色，过了的为红色
     id: control
 
 

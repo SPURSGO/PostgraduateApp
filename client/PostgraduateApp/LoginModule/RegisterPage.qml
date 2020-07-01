@@ -1,9 +1,10 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import PGAPP.controls 1.0
+
 
 Page {
+    title:("注册")
     id: registerPage
 
     property color backGroundColor : "#353535"  //背景颜色
@@ -126,11 +127,6 @@ Page {
             {
 
             }
-        }
-
-        UserRegister
-        {
-            id:ur
         }
 
         Button{
