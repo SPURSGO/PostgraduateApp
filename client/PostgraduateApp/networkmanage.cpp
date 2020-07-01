@@ -29,7 +29,6 @@ Q_INVOKABLE void Networkmanage::connect_server()  //进行网络连接
     {
         std::cerr<<"Connect error:"<<strerror(errno)<<std::endl;    //打印错误信息
     }
-
 }
 
 Q_INVOKABLE bool Networkmanage::register_userinfo(const QString& username, const QString& pwd)  //用户注册
