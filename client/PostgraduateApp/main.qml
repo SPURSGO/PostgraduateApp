@@ -1,7 +1,12 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import JSON.Data 1.0
-
+import "./HomeModule"
+import "./DayModule"
+import "./LoginModule"
+import "./CommunityModule"
+import "./MyModule"
+import "./AcademyModule"
 ApplicationWindow {
     id: window
     visible: true
@@ -50,7 +55,7 @@ ApplicationWindow {
                 text: qsTr("我的")
                 width: parent.width
                 onClicked: {
-                    stackView.push("UserInfo.qml")
+                    stackView.push("MyModule/UserInfo.qml")
                     drawer.close()
                 }
             }
@@ -58,7 +63,7 @@ ApplicationWindow {
                 text: qsTr("社区")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Community.qml")
+                    stackView.push("CommunityModule/Community.qml")
                     drawer.close()
                 }
             }
@@ -66,7 +71,7 @@ ApplicationWindow {
                 text: qsTr("日历")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Calendar.qml")
+                    stackView.push("DayModule/Calendar.qml")
                     drawer.close()
                 }
             }
@@ -74,7 +79,7 @@ ApplicationWindow {
                 text: qsTr("院校")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Institution.qml")
+                    stackView.push("AcademyModule/Institution.qml")
                     drawer.close()
                 }
             }
@@ -82,7 +87,7 @@ ApplicationWindow {
                 text: qsTr("登陆")
                 width:parent.width
                 onClicked: {
-                    stackView.push("LoginPage.qml")
+                    stackView.push("LoginModule/LoginPage.qml")
                     drawer.close()
                 }
             }
@@ -90,7 +95,7 @@ ApplicationWindow {
                 text: qsTr("注册")
                 width:parent.width
                 onClicked: {
-                    stackView.push("RegisterPage.qml")
+                    stackView.push("LoginModule/RegisterPage.qml")
                     drawer.close()
                 }
             }
@@ -126,16 +131,16 @@ ApplicationWindow {
 
     function showRegister()   //切换注册见面
     {
-        stackView.replace("qrc:/RegisterPage.qml")        
+        stackView.replace("qrc:LoginModule/RegisterPage.qml")
     }
 
     function showLogin()    //从 注册界面 切换登陆 界面
     {
-        stackView.replace("qrc:/LoginPage.qml")
+        stackView.replace("qrc:LoginModule/LoginPage.qml")
     }
     function loginSuccess()  //登陆成功切换到个人信息页面
     {
-        stackView.push("qrc:/UserInfo.qml",{status:1})
+        stackView.push("qrc:MyModule/UserInfo.qml",{status:1})
     }
 
     function getLoginstatus()
