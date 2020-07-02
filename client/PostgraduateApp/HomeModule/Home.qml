@@ -128,7 +128,7 @@ Page{
                     for(var i=0;i<6;i++){
                         change_id_model_modeltext(i)  //接收文章
                     }
-                   networkmange.receive_vedio()  //接受
+//                   networkmange.receive_vedio()  //接受
 
                 }
             }
